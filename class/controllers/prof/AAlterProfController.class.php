@@ -4,7 +4,6 @@
 namespace sgbdtrue\controllers\prof;
 
 
-use sgbdtrue\entities\prof\Gender;
 use sgbdtrue\entities\prof\Prof;
 use sgbdtrue\controllers\IController;
 
@@ -15,7 +14,6 @@ abstract class AAlterProfController implements IController
 
     protected final function validPostedDataAndSet(Prof $prof)
     {
-
         $invalidFields = array();
 
         $prof->setPrenom(isset($_POST['prenom']) ? trim($_POST['prenom']) : "");

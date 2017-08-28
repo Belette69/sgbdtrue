@@ -61,7 +61,7 @@ class EditProfController extends AAlterProfController implements IController
             $profDao->insertOrUpdate($prof);
             $pdo->commit();
 
-            header("Location: ".$_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"]);
+            header("Location: index.php?action=home&entities=prof");
 
 
         }

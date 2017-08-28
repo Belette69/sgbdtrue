@@ -8,7 +8,7 @@ use sgbdtrue\DAO\prof\MysqlProfDao;
 use sgbdtrue\entities\prof\Gender;
 use sgbdtrue\entities\prof\Prof;
 use sgbdtrue\exceptions\InvalidDataException;
-use sgbdtrue\MysqlConnection;
+use sgbdtrue\utils\MysqlConnection;
 use sgbdtrue\views\prof\CreateProfView;
 use sgbdtrue\views\prof\HomeView;
 use sgbdtrue\controllers\IController;

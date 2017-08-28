@@ -6,7 +6,7 @@ use \sgbdtrue\entities\prof\Prof;
 if(!isset($prof) || !($prof instanceof Prof))
     $prof = new Prof();;
 ?>
-<form action="./" method="post" class="user-form">
+<form action="" method="post" class="user-form">
     <p>
         <label for="prenom">Prénom</label><input <?php echo isset($invalidFields) && in_array('prenom', $invalidFields) ? 'class="error"' : ""?> type="text" required="required" name="prenom" id="prenom" value="<?php echo htmlentities($prof->getPrenom(), ENT_QUOTES);?>"/>
     </p>

@@ -5,7 +5,7 @@
  *  @var \sgbdtrue\entities\Prof $prof
  */
 ?>
-<form action="./" method="post" class="user-form">
+<form action="" method="post" class="user-form">
     <p>Are you sure to want remove the prof : <?php echo htmlentities($prof->getPrenom().' '.$prof->getNom());?></p>
     <p><input type="hidden" name="confirmed" value="YES"/></p>
     <p class="submit-container"><input type="submit" value="OK"/></p>
