@@ -1,21 +1,21 @@
 <?php
 
-namespace sgbdtrue\views\user;
+namespace sgbdtrue\views\eleve;
 
 use sgbdtrue\views\AView;
 use sgbdtrue\views\IView;
-class ConfirmUserDeletionView extends AView implements IView
+class EditEleveView extends AView implements IView
 {
 
 
     protected  function getTemplateNameWithoutExt()
     {
-        return 'user\confirmSupp';
+        return 'eleve\editEleve';
     }
 
     protected  function getTitle()
     {
-        return "Confirm deletion";
+        return "Edit eleve";
     }
 
 }

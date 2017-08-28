@@ -1,21 +1,21 @@
 <?php
 
-namespace sgbdtrue\views\user;
+namespace sgbdtrue\views\eleve;
 use sgbdtrue\views\AView;
 use sgbdtrue\views\IView;
 
-class CreateUserView extends AView implements IView
+class CreateEleveView extends AView implements IView
 {
 
 
     protected  function getTemplateNameWithoutExt()
     {
-        return 'user\editUser';
+        return 'eleve\editEleve';
     }
 
     protected  function getTitle()
     {
-        return "Create user";
+        return "Create eleve";
     }
 
 }

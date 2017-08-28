@@ -1,23 +1,23 @@
 <?php
 
 
-namespace sgbdtrue\controllers\user;
+namespace sgbdtrue\controllers\eleve;
 
 
-use sgbdtrue\DAO\user\MysqlUserDao;
-use sgbdtrue\exceptions\user\InvalidActionException;
-use sgbdtrue\exceptions\user\InvalidDataException;
-use sgbdtrue\utils\user\ErrorMessageManager;
-use sgbdtrue\utils\user\MysqlConnection;
-use sgbdtrue\views\user\EditUserView;
-use sgbdtrue\views\user\HomeView;
+use sgbdtrue\DAO\eleve\MysqlEleveDao;
+use sgbdtrue\exceptions\eleve\InvalidActionException;
+use sgbdtrue\exceptions\eleve\InvalidDataException;
+use sgbdtrue\utils\ErrorMessageManager;
+use sgbdtrue\utils\MysqlConnection;
+use sgbdtrue\views\eleve\EditEleveView;
+use sgbdtrue\views\eleve\HomeView;
 use sgbdtrue\controllers\IController;
 
-class EditUserController extends AAlterUserController implements IController
+class EditEleveController extends AAlterEleveController implements IController
 {
 
     public function doAction()
-         {
+    {
 
         $data = array();
         $isTransactioStarted = false;
@@ -33,36 +33,36 @@ class EditUserController extends AAlterUserController implements IController
 
 
             $pdo = MysqlConnection::getConnection();
-            $userDao = new MysqlUserDao($pdo);
+            $eleveDao = new MysqlEleveDao($pdo);
 
 
-            $user = $userDao->findById($id);
+            $eleve = $eleveDao->findById($id);
 
-            if($user === null)
-                throw new InvalidActionException("Unable to retrieve the user with id ".$id);
+            if($eleve === null)
+                throw new InvalidActionException("Unable to retrieve the eleve with id ".$id);
 
-            $data['user'] = $user;
+            $data['eleve'] = $eleve;
 
             if(!isset($_POST['id']))
             {
-                $view = new EditUserView();
+                $view = new EditEleveView();
                 $view->showView($data);
                 return;
             }
 
 
             //On a soumis le formulaire
-            $invalidFields = $this->validPostedDataAndSet($user);
+            $invalidFields = $this->validPostedDataAndSet($eleve);
 
 
             if(count($invalidFields) > 0)
                 throw new InvalidDataException("Invalid submitted datas", $invalidFields);
 
             $isTransactioStarted = $pdo->beginTransaction();
-            $userDao->insertOrUpdate($user);
+            $eleveDao->insertOrUpdate($eleve);
             $pdo->commit();
 
-            header("Location: index.php?action=home&entities=user");
+            header("Location: index.php?action=home&entities=eleve");
 
 
         }
@@ -72,7 +72,7 @@ class EditUserController extends AAlterUserController implements IController
             if($ex instanceof InvalidActionException)
             {
                 ErrorMessageManager::getInstance()->addMessage($ex->getMessage());
-                header("Location: index.php?action=home&entities=user");
+                header("Location: index.php?action=home&entities=eleve");
                 return;
             }
 
@@ -92,7 +92,7 @@ class EditUserController extends AAlterUserController implements IController
 
 
 
-            $view = new EditUserView();
+            $view = new EditEleveView();
             $view->showView($data);
 
 

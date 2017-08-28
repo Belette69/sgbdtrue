@@ -1,21 +1,20 @@
 <?php
 
-namespace sgbdtrue\views\user;
+namespace sgbdtrue\views\eleve;
 
 use sgbdtrue\views\AView;
 use sgbdtrue\views\IView;
-class EditUserView extends AView implements IView
+class ShowEleveView extends AView implements IView
 {
-
 
     protected  function getTemplateNameWithoutExt()
     {
-        return 'user\editUser';
+        return 'eleve\default';
     }
 
     protected  function getTitle()
     {
-        return "Edit user";
+        return "List of eleves";
     }
 
 }

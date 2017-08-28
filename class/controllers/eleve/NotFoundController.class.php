@@ -1,6 +1,6 @@
 <?php
 
-namespace sgbdtrue\controllers\user;
+namespace sgbdtrue\controllers\eleve;
 use sgbdtrue\controllers\IController;
 
 

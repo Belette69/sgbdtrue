@@ -1,20 +1,21 @@
 <?php
 
-namespace sgbdtrue\views\user;
+namespace sgbdtrue\views\eleve;
 
 use sgbdtrue\views\AView;
 use sgbdtrue\views\IView;
-class HomeView extends AView implements IView
+class ConfirmEleveDeletionView extends AView implements IView
 {
+
 
     protected  function getTemplateNameWithoutExt()
     {
-        return 'user\default';
+        return 'eleve\confirmSupp';
     }
 
     protected  function getTitle()
     {
-        return "Home page";
+        return "Confirm deletion";
     }
 
 }

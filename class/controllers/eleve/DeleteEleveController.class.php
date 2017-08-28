@@ -1,20 +1,20 @@
 <?php
 
 
-namespace sgbdtrue\controllers\user;
+namespace sgbdtrue\controllers\eleve;
 
 
-use sgbdtrue\DAO\user\MysqlUserDao;
-use sgbdtrue\exceptions\user\InvalidActionException;
-use sgbdtrue\exceptions\user\InvalidDataException;
-use sgbdtrue\utils\user\ErrorMessageManager;
-use sgbdtrue\utils\user\MysqlConnection;
-use sgbdtrue\views\user\ConfirmUserDeletionView;
-use sgbdtrue\views\user\EditUserView;
-use sgbdtrue\views\user\HomeView;
+use sgbdtrue\DAO\eleve\MysqlEleveDao;
+use sgbdtrue\exceptions\eleve\InvalidActionException;
+use sgbdtrue\exceptions\eleve\InvalidDataException;
+use sgbdtrue\utils\ErrorMessageManager;
+use sgbdtrue\utils\MysqlConnection;
+use sgbdtrue\views\eleve\ConfirmEleveDeletionView;
+use sgbdtrue\views\eleve\EditEleveView;
+use sgbdtrue\views\eleve\HomeView;
 use sgbdtrue\controllers\IController;
 
-class DeleteUserController implements IController
+class DeleteEleveController implements IController
 {
 
     public function doAction()
@@ -33,27 +33,27 @@ class DeleteUserController implements IController
 
 
             $pdo = MysqlConnection::getConnection();
-            $userDao = new MysqlUserDao($pdo);
+            $eleveDao = new MysqlEleveDao($pdo);
 
 
-            $user = $userDao->findById($id);
+            $eleve = $eleveDao->findById($id);
             
 
-            if($user === null)
-                throw new InvalidActionException("Unable to retrieve the user with id ".$id);
+            if($eleve === null)
+                throw new InvalidActionException("Unable to retrieve the eleve with id ".$id);
 
 
             if(!isset($_POST['confirmed']))
             {
-                $view = new ConfirmUserDeletionView();
-                $view->showView(array('user'=> $user));
+                $view = new ConfirmEleveDeletionView();
+                $view->showView(array('eleve'=> $eleve));
                 return;
             }
             
-            $userDao->delete($user);
+            $eleveDao->delete($eleve);
             
-            ErrorMessageManager::getInstance()->addMessage("User removed with seccess!");
-            header("Location: index.php?action=home&entities=user");
+            ErrorMessageManager::getInstance()->addMessage("Eleve removed with seccess!");
+            header("Location: index.php?action=home&entities=eleve");
 
 
 

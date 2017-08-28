@@ -12,13 +12,11 @@ class Eleve
     /**
      * @var string
      */
-    private $Nom;
+    private $nom;
     /**
      * @var string
      */
     private $prenom;
-
-
     /**
      * @var string
      */
@@ -48,7 +46,7 @@ class Eleve
      */
     public function getNom()
     {
-        return $this->Nom;
+        return $this->nom;
     }
 
     /**
@@ -56,7 +54,7 @@ class Eleve
      */
     public function setNom($nom)
     {
-        $this->Nom = $nom;
+        $this->nom = $nom;
     }
 
     /**
@@ -78,10 +76,6 @@ class Eleve
     /**
      * @return défini|string
      */
-
-
-
-    
 
     /**
      * @return string

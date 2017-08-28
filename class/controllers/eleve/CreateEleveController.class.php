@@ -1,31 +1,30 @@
 <?php
 
 
-namespace sgbdtrue\controllers\user;
+namespace sgbdtrue\controllers\eleve;
 
 
-use sgbdtrue\DAO\user\MysqlUserDao;
-use sgbdtrue\entities\user\Gender;
-use sgbdtrue\entities\user\User;
-use sgbdtrue\exceptions\user\InvalidDataException;
-use sgbdtrue\utils\user\MysqlConnection;
-use sgbdtrue\views\user\CreateUserView;
-use sgbdtrue\views\user\HomeView;
+use sgbdtrue\DAO\eleve\MysqlEleveDao;
+use sgbdtrue\entities\eleve\Eleve;
+use sgbdtrue\exceptions\InvalidDataException;
+use sgbdtrue\utils\MysqlConnection;
+use sgbdtrue\views\eleve\CreateEleveView;
+use sgbdtrue\views\eleve\ShowEleveView;
 use sgbdtrue\controllers\IController;
 
 
 
 
 
-class CreateUserController extends AAlterUserController implements IController
+class CreateEleveController extends AAlterEleveController implements IController
 {
     public function doAction()
      {
         
 
-        $user = new User();
-        $data['user'] = $user;
-        $data['userList'] = array();
+        $eleve = new Eleve();
+        $data['eleve'] = $eleve;
+        $data['eleveList'] = array();
         $pdo = null;
         $isTransactioStarted = false;
         $data = array();
@@ -34,24 +33,24 @@ class CreateUserController extends AAlterUserController implements IController
 
             if(!isset($_POST['id']))
             {
-                $view = new CreateUserView();
+                $view = new CreateEleveView();
                 $view->showView($data);
                 return;
             }
             
             
-            $invalidFields = $this->validPostedDataAndSet($user);
+            $invalidFields = $this->validPostedDataAndSet($eleve);
 
             if(count($invalidFields) > 0)
                 throw new InvalidDataException("Invalid submitted datas", $invalidFields);
 
             $pdo = MysqlConnection::getConnection();
-            $userDao = new MysqlUserDao($pdo);
+            $eleveDao = new MysqlEleveDao($pdo);
             $isTransactioStarted = $pdo->beginTransaction();
 
-            $userDao->insertOrUpdate($user);
+            $eleveDao->insertOrUpdate($eleve);
             $pdo->commit();
-            header("Location: index.php?action=home&entities=user");
+            header("Location: index.php?action=home&entities=eleve");
                 
         }
        catch (\Exception $ex)
@@ -70,7 +69,7 @@ class CreateUserController extends AAlterUserController implements IController
            if($isTransactioStarted)
                $pdo->rollBack();
 
-           $view = new CreateUserView();
+           $view = new CreateEleveView();
            $view->showView($data);
 
        }

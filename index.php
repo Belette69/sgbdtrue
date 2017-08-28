@@ -3,9 +3,9 @@ session_start();
 require_once __DIR__.DIRECTORY_SEPARATOR.'class'.DIRECTORY_SEPARATOR.'autoloader.php';
 if(isset($_GET['entities']))
 {
-    if($_GET['entities']=='user')
+    if($_GET['entities']=='eleve')
     {
-        $entities='user';
+        $entities='eleve';
     }
     else if($_GET['entities']=='prof')
     {
@@ -45,22 +45,22 @@ if(!isset($_GET['action'])||$entities=='Homepage')
 }
 else if($_GET['action'] == 'create')
 {
-    $path = '\\sgbdtrue\\controllers\\'.$entities.'\\CreateUserController';
+    $path = '\\sgbdtrue\\controllers\\'.$entities.'\\Create'.ucfirst($entities).'Controller';
     $controller = new $path();
 }
 else if($_GET['action'] == 'edit')
 {
-    $path = '\\sgbdtrue\\controllers\\'.$entities.'\\EditUserController'; 
+    $path = '\\sgbdtrue\\controllers\\'.$entities.'\\Edit'.ucfirst($entities).'Controller'; 
    $controller = new $path();
 }
 else if($_GET['action'] == 'delete')
 {
-    $path = '\\sgbdtrue\\controllers\\'.$entities.'\\DeleteUserController';
+    $path = '\\sgbdtrue\\controllers\\'.$entities.'\\Delete'.ucfirst($entities).'Controller';
     $controller = new $path();
 }
 else if($_GET['action'] == 'home')
 {
-    $path = '\\sgbdtrue\\controllers\\'.$entities.'\\HomeController';
+    $path = '\\sgbdtrue\\controllers\\'.$entities.'\\Show'.ucfirst($entities).'Controller';
     $controller = new $path();
 }
 else

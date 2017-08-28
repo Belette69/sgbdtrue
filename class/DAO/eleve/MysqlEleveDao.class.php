@@ -1,12 +1,12 @@
 <?php
 
 
-namespace sgbdtrue\DAO\user;
+namespace sgbdtrue\DAO\eleve;
 
 
-use sgbdtrue\entities\user\User;
+use sgbdtrue\entities\eleve\Eleve;
 
-class MysqlUserDao implements IUserDao
+class MysqlEleveDao implements IEleveDao
 {
     /**
      * @var \PDO
@@ -19,57 +19,57 @@ class MysqlUserDao implements IUserDao
     }
 
     /**
-     * @param User $user
+     * @param Eleve $eleve
      * @return void
      * @throws \PDOException
      */
-    public function insertOrUpdate(User $user)
+    public function insertOrUpdate(Eleve $eleve)
     {
-        if($user->getId() === null)
-            $this->insert($user);
+        if($eleve->getId() === null)
+            $this->insert($eleve);
         else
-            $this->update($user);
+            $this->update($eleve);
 
     }
 
     /**
-     * @param User $user
+     * @param Eleve $eleve
      * @return void
      * @throws \PDOException
      */
-    private function insert(User $user)
+    private function insert(Eleve $eleve)
     {
 
         $sql = "INSERT INTO sgbdtrue.eleves (Id, Nom, Prenom,  Email) 
                   VALUES (null, :nom, :prenom, :email);";
 
         $preparedStatement = $this->pdo->prepare($sql);
-        $preparedStatement->bindValue(':nom', $user->getNom(), \PDO::PARAM_STR);
-        $preparedStatement->bindValue(':prenom', $user->getPrenom(), \PDO::PARAM_STR);
-        $preparedStatement->bindValue(':email', $user->getEmail(), \PDO::PARAM_STR);
+        $preparedStatement->bindValue(':nom', $eleve->getNom(), \PDO::PARAM_STR);
+        $preparedStatement->bindValue(':prenom', $eleve->getPrenom(), \PDO::PARAM_STR);
+        $preparedStatement->bindValue(':email', $eleve->getEmail(), \PDO::PARAM_STR);
 
         $preparedStatement->execute();
 
         $lastId = $this->pdo->lastInsertId();
-        $user->setId($lastId);
+        $eleve->setId($lastId);
 
 
     }
     /**
-     * @param User $user
+     * @param Eleve $eleve
      * @return void
      * @throws \PDOException
      */
-    private function update(User $user)
+    private function update(Eleve $eleve)
     {
 
         $sql = "UPDATE sgbdtrue.eleves SET Nom = :nom, Prenom = :prenom, Email = :email WHERE Id = :id LIMIT 1";
 
         $preparedStatement = $this->pdo->prepare($sql);
-        $preparedStatement->bindValue(':nom', $user->getNom(), \PDO::PARAM_STR);
-        $preparedStatement->bindValue(':prenom', $user->getPrenom(), \PDO::PARAM_STR);
-        $preparedStatement->bindValue(':email', $user->getEmail(), \PDO::PARAM_STR);
-        $preparedStatement->bindValue(':id', $user->getId(), \PDO::PARAM_INT);
+        $preparedStatement->bindValue(':nom', $eleve->getNom(), \PDO::PARAM_STR);
+        $preparedStatement->bindValue(':prenom', $eleve->getPrenom(), \PDO::PARAM_STR);
+        $preparedStatement->bindValue(':email', $eleve->getEmail(), \PDO::PARAM_STR);
+        $preparedStatement->bindValue(':id', $eleve->getId(), \PDO::PARAM_INT);
 
         $preparedStatement->execute();
 
@@ -78,31 +78,31 @@ class MysqlUserDao implements IUserDao
 
 
     /**
-     * @param User $user
+     * @param Eleve $eleve
      * @return void
      * @throws \PDOException, \LogicException
      */
-    public function delete(User $user)
+    public function delete(Eleve $eleve)
     {
         
-        if($user->getId() === null)
+        if($eleve->getId() === null)
             throw new \LogicException("Id can't be null");
 
         $sql = "DELETE FROM sgbdtrue.eleves  WHERE Id = :id LIMIT 1";
 
         $preparedStatement = $this->pdo->prepare($sql);
 
-        $preparedStatement->bindValue(':id', $user->getId(), \PDO::PARAM_INT);
+        $preparedStatement->bindValue(':id', $eleve->getId(), \PDO::PARAM_INT);
 
         $preparedStatement->execute();
 
-        $user->setId(null);
+        $eleve->setId(null);
 
     }
 
     /**
      * @param $id int
-     * @return User | null
+     * @return Eleve | null
      */
     public function findById($id)
     {
@@ -117,27 +117,27 @@ class MysqlUserDao implements IUserDao
         if($row === false)
             return null;
 
-        return $this->makeUserFromRow($row);;
+        return $this->makeEleveFromRow($row);;
 
 
     }
 
     /**
-     * @return multitpe:User
+     * @return multitpe:Eleve
      */
     public function findAll()
     {
         $sql = "SELECT * FROM sgbdtrue.eleves ORDER BY Nom, Prenom ASC";
         $statement = $this->pdo->query($sql);
 
-        $userList = [];
+        $eleveList = [];
         while(false !== ($row = $statement->fetch(\PDO::FETCH_ASSOC)))
         {
 
-            $userList[] =  $this->makeUserFromRow($row);
+            $eleveList[] =  $this->makeEleveFromRow($row);
         }
 
-        return $userList;
+        return $eleveList;
     }
 
     public function findByEmail($email)
@@ -153,18 +153,18 @@ class MysqlUserDao implements IUserDao
         if($row === false)
             return null;
 
-        return $this->makeUserFromRow($row);;
+        return $this->makeEleveFromRow($row);;
     }
 
-    private function makeUserFromRow(array $row)
+    private function makeEleveFromRow(array $row)
     {
-        $user = new User();
-        $user->setId($row['Id']);
-        $user->setEmail($row['Email']);
-        $user->setNom($row['Nom']);
-        $user->setPrenom($row['Prenom']);
+        $eleve = new Eleve();
+        $eleve->setId($row['id']);
+        $eleve->setEmail($row['email']);
+        $eleve->setNom($row['nom']);
+        $eleve->setPrenom($row['prenom']);
         
-        return $user;
+        return $eleve;
     }
 
 

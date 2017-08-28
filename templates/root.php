@@ -23,7 +23,7 @@
     }
      
     
-    $errorMessageList = \sgbdtrue\utils\user\ErrorMessageManager::getInstance()->getMessageList();
+    $errorMessageList = \sgbdtrue\utils\ErrorMessageManager::getInstance()->getMessageList();
 
 
     foreach ($errorMessageList as $error)
