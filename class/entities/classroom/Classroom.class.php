@@ -3,7 +3,7 @@
 namespace sgbdtrue\entities\classroom;
 
 
-class User
+class Classroom
 {
     /**
      * @var int

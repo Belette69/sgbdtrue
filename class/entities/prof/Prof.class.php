@@ -1,9 +1,9 @@
 <?php
 
-namespace sgbdtrue\entities\user;
+namespace sgbdtrue\entities\prof;
 
 
-class User
+class Prof
 {
     /**
      * @var int
@@ -12,13 +12,16 @@ class User
     /**
      * @var string
      */
-    private $Nom;
+    private $prenom;
     /**
      * @var string
      */
-    private $prenom;
+    private $nom;
 
-
+    /**
+     * @var string | défini dans la classe Gender
+     */
+    private $gender;
     /**
      * @var string
      */
@@ -46,22 +49,6 @@ class User
     /**
      * @return string
      */
-    public function getNom()
-    {
-        return $this->Nom;
-    }
-
-    /**
-     * @param string $nom
-     */
-    public function setNom($nom)
-    {
-        $this->Nom = $nom;
-    }
-
-    /**
-     * @return string
-     */
     public function getPrenom()
     {
         return $this->prenom;
@@ -76,12 +63,41 @@ class User
     }
 
     /**
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * @param string $nom
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+    }
+
+    /**
      * @return défini|string
      */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param défini|string $gender
+     */
+    public function setGender($gender)
+    {
+        if($gender == Gender::F)
+            $this->gender = $gender;
+        else
+            $this->gender = Gender::M;
 
 
-
-    
+    }
 
     /**
      * @return string

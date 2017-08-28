@@ -3,7 +3,7 @@
 namespace sgbdtrue\entities\secretariat;
 
 
-class User
+class Secretariat
 {
     /**
      * @var int
