@@ -3,7 +3,7 @@
 namespace sgbdtrue\entities\cours;
 
 
-class User
+class Cours
 {
     /**
      * @var int
