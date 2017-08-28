@@ -10,7 +10,7 @@ use sgbdtrue\utils\prof\MysqlConnection;
 use sgbdtrue\views\prof\HomeView;
 use sgbdtrue\controllers\IController;
 
-class HomeController implements IController
+class ShowProfController implements IController
 {
 
     public function doAction()
