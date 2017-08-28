@@ -4,24 +4,24 @@
 namespace sgbdtrue\controllers\prof;
 
 
-use sgbdtrue\DAO\prof\MysqlUserDao;
+use sgbdtrue\DAO\prof\MysqlProfDao;
 use sgbdtrue\entities\prof\Gender;
-use sgbdtrue\entities\prof\User;
+use sgbdtrue\entities\prof\Prof;
 use sgbdtrue\exceptions\prof\InvalidDataException;
 use sgbdtrue\utils\prof\MysqlConnection;
-use sgbdtrue\views\prof\CreateUserView;
+use sgbdtrue\views\prof\CreateProfView;
 use sgbdtrue\views\prof\HomeView;
 use sgbdtrue\controllers\IController;
 
-class CreateUserController extends AAlterUserController implements IController
+class CreateProfController extends AAlterProfController implements IController
 {
     public function doAction()
     {
 
 
-        $user = new User();
-        $data['user'] = $user;
-        $data['userList'] = array();
+        $prof = new Prof();
+        $data['prof'] = $prof;
+        $data['profList'] = array();
         $pdo = null;
         $isTransactioStarted = false;
         $data = array();
@@ -30,20 +30,20 @@ class CreateUserController extends AAlterUserController implements IController
 
             if(!isset($_POST['id']))
             {
-                $view = new CreateUserView();
+                $view = new CreateProfView();
                 $view->showView($data);
                 return;
             }
-            $invalidFields = $this->validPostedDataAndSet($user);
+            $invalidFields = $this->validPostedDataAndSet($prof);
 
             if(count($invalidFields) > 0)
                 throw new InvalidDataException("Invalid submitted datas", $invalidFields);
 
             $pdo = MysqlConnection::getConnection();
-            $userDao = new MysqlUserDao($pdo);
+            $profDao = new MysqlProfDao($pdo);
             $isTransactioStarted = $pdo->beginTransaction();
 
-            $userDao->insertOrUpdate($user);
+            $profDao->insertOrUpdate($prof);
             $pdo->commit();
             header("Location: ".$_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"]);
 
@@ -65,7 +65,7 @@ class CreateUserController extends AAlterUserController implements IController
            if($isTransactioStarted)
                $pdo->rollBack();
 
-           $view = new CreateUserView();
+           $view = new CreateProfView();
            $view->showView($data);
 
        }

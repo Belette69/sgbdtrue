@@ -3,18 +3,18 @@
 namespace sgbdtrue\views\prof;
 
 
-class CreateUserView extends AView implements IView
+class CreateProfView extends AView implements IView
 {
 
 
     protected  function getTemplateNameWithoutExt()
     {
-        return 'prof\editUser';
+        return 'prof\editProf';
     }
 
     protected  function getTitle()
     {
-        return "Create user";
+        return "Create prof";
     }
 
 }

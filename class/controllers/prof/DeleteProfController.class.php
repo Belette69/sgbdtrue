@@ -4,17 +4,17 @@
 namespace sgbdtrue\controllers\prof;
 
 
-use sgbdtrue\DAO\prof\MysqlUserDao;
+use sgbdtrue\DAO\prof\MysqlProfDao;
 use sgbdtrue\exceptions\prof\InvalidActionException;
 use sgbdtrue\exceptions\prof\InvalidDataException;
 use sgbdtrue\utils\prof\ErrorMessageManager;
 use sgbdtrue\utils\prof\MysqlConnection;
-use sgbdtrue\views\prof\ConfirmUserDeletionView;
-use sgbdtrue\views\prof\EditUserView;
+use sgbdtrue\views\prof\ConfirmProfDeletionView;
+use sgbdtrue\views\prof\EditProfView;
 use sgbdtrue\views\prof\HomeView;
 use sgbdtrue\controllers\IController;
 
-class DeleteUserController implements IController
+class DeleteProfController implements IController
 {
 
     public function doAction()
@@ -33,23 +33,23 @@ class DeleteUserController implements IController
 
 
             $pdo = MysqlConnection::getConnection();
-            $userDao = new MysqlUserDao($pdo);
+            $profDao = new MysqlProfDao($pdo);
 
 
-            $user = $userDao->findById($id);
+            $prof = $profDao->findById($id);
 
-            if($user === null)
-                throw new InvalidActionException("Unable to retrieve the user with id ".$id);
+            if($prof === null)
+                throw new InvalidActionException("Unable to retrieve the prof with id ".$id);
 
 
             if(!isset($_POST['confirmed']))
             {
-                $view = new ConfirmUserDeletionView();
-                $view->showView(array('user'=> $user));
+                $view = new ConfirmProfDeletionView();
+                $view->showView(array('prof'=> $prof));
                 return;
             }
 
-            $userDao->delete($user);
+            $profDao->delete($prof);
             ErrorMessageManager::getInstance()->addMessage("Enseignent supprimé avec succes!");
             header("Location: ".$_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"]);
 

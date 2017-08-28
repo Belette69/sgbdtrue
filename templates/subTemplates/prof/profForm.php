@@ -1,11 +1,10 @@
 <?php
-use \sgbdtrue\entities\prof\Gender;
-use \sgbdtrue\entities\prof\User;
+use \sgbdtrue\entities\prof\Prof;
 /**
- * @var \sgbdtrue\entities\User $user
+ * @var \sgbdtrue\entities\Prof $prof
  */
-if(!isset($user) || !($user instanceof User))
-    $user = new User();;
+if(!isset($prof) || !($prof instanceof Prof))
+    $prof = new Prof();;
 ?>
 <form action="./" method="post" class="user-form">
     <p>
@@ -20,5 +19,5 @@ if(!isset($user) || !($user instanceof User))
 
 
     <p class="submit-container"><input type="submit" value="OK"/></p>
-    <input type="hidden" name="id" value="<?php echo htmlentities($user->getId()); ?>"/>
+    <input type="hidden" name="id" value="<?php echo htmlentities($prof->getId()); ?>"/>
 </form>

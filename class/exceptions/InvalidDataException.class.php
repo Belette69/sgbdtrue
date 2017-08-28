@@ -1,5 +1,5 @@
 <?php
-namespace sgbdtrue\exceptions\user;
+namespace sgbdtrue\exceptions;
 
 class InvalidDataException extends \Exception
 {

@@ -1,16 +1,16 @@
 <?php
 
 
-namespace sgbdtrue\controllers\classroom;
+namespace sgbdtrue\controllers\cours;
 
 
-use sgbdtrue\DAO\classroom\MysqlUserDao;
-use sgbdtrue\exceptions\classroom\InvalidActionException;
-use sgbdtrue\exceptions\classroom\InvalidDataException;
-use sgbdtrue\utils\classroom\ErrorMessageManager;
-use sgbdtrue\utils\classroom\MysqlConnection;
-use sgbdtrue\views\classroom\EditUserView;
-use sgbdtrue\views\classroom\HomeView;
+use sgbdtrue\DAO\cours\MysqlUserDao;
+use sgbdtrue\exceptions\cours\InvalidActionException;
+use sgbdtrue\exceptions\cours\InvalidDataException;
+use sgbdtrue\utils\cours\ErrorMessageManager;
+use sgbdtrue\utils\cours\MysqlConnection;
+use sgbdtrue\views\cours\EditUserView;
+use sgbdtrue\views\cours\HomeView;
 use sgbdtrue\controllers\IController;
 
 class EditUserController extends AAlterUserController implements IController

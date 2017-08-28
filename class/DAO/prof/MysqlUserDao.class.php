@@ -4,9 +4,9 @@
 namespace sgbdtrue\DAO\prof;
 
 
-use sgbdtrue\entities\prof\User;
+use sgbdtrue\entities\prof\Prof;
 
-class MysqlUserDao implements IUserDao
+class MysqlProfDao implements IProfDao
 {
     /**
      * @var \PDO
@@ -19,59 +19,57 @@ class MysqlUserDao implements IUserDao
     }
 
     /**
-     * @param User $user
+     * @param Prof $prof
      * @return void
      * @throws \PDOException
      */
-    public function insertOrUpdate(User $user)
+    public function insertOrUpdate(Prof $user)
     {
-        if($user->getId() === null)
-            $this->insert($user);
+        if($prof->getId() === null)
+            $this->insert($prof);
         else
-            $this->update($user);
+            $this->update($prof);
 
     }
 
     /**
-     * @param User $user
+     * @param Prof $prof
      * @return void
      * @throws \PDOException
      */
-    private function insert(User $user)
+    private function insert(Prof $prof)
     {
 
         $sql = "INSERT INTO sgbdtrue.professeurs (id, prenom, nom,  email) 
                   VALUES (null, :prenom, :nom, :email);";
 
         $preparedStatement = $this->pdo->prepare($sql);
-        $preparedStatement->bindValue(':prenom', $user->getprenom(), \PDO::PARAM_STR);
-        $preparedStatement->bindValue(':nom', $user->getnom(), \PDO::PARAM_STR);
-        $preparedStatement->bindValue(':gender', $user->getGender(), \PDO::PARAM_STR);
-        $preparedStatement->bindValue(':email', $user->getEmail(), \PDO::PARAM_STR);
+        $preparedStatement->bindValue(':prenom', $prof->getPrenom(), \PDO::PARAM_STR);
+        $preparedStatement->bindValue(':nom', $prof->getNom(), \PDO::PARAM_STR);
+        $preparedStatement->bindValue(':email', $prof->getEmail(), \PDO::PARAM_STR);
 
         $preparedStatement->execute();
 
         $lastId = $this->pdo->lastInsertId();
-        $user->setId($lastId);
+        $prof->setId($lastId);
 
 
     }
     /**
-     * @param User $user
+     * @param Prof $prof
      * @return void
      * @throws \PDOException
      */
-    private function update(User $user)
+    private function update(Prof $prof)
     {
 
-        $sql = "UPDATE sgbdtrue.professeurs SET prenom = :prenom, nom = :nom, gender = :gender, email = :email WHERE id = :id LIMIT 1";
+        $sql = "UPDATE sgbdtrue.professeurs SET prenom = :prenom, nom = :nom, email = :email WHERE id = :id LIMIT 1";
 
         $preparedStatement = $this->pdo->prepare($sql);
-        $preparedStatement->bindValue(':prenom', $user->getprenom(), \PDO::PARAM_STR);
-        $preparedStatement->bindValue(':nom', $user->getnom(), \PDO::PARAM_STR);
-        $preparedStatement->bindValue(':gender', $user->getGender(), \PDO::PARAM_STR);
-        $preparedStatement->bindValue(':email', $user->getEmail(), \PDO::PARAM_STR);
-        $preparedStatement->bindValue(':id', $user->getId(), \PDO::PARAM_INT);
+        $preparedStatement->bindValue(':prenom', $prof->getPrenom(), \PDO::PARAM_STR);
+        $preparedStatement->bindValue(':nom', $prof->getNom(), \PDO::PARAM_STR);
+        $preparedStatement->bindValue(':email', $prof->getEmail(), \PDO::PARAM_STR);
+        $preparedStatement->bindValue(':id', $prof->getId(), \PDO::PARAM_INT);
 
         $preparedStatement->execute();
 
@@ -80,30 +78,30 @@ class MysqlUserDao implements IUserDao
 
 
     /**
-     * @param User $user
+     * @param Prof $prof
      * @return void
      * @throws \PDOException, \LogicException
      */
-    public function delete(User $user)
+    public function delete(Prof $prof)
     {
-        if($user->getId() === null)
+        if($prof->getId() === null)
             throw new \LogicException("Id can't be null");
 
         $sql = "DELETE FROM sgbdtrue.professeurs  WHERE id = :id LIMIT 1";
 
         $preparedStatement = $this->pdo->prepare($sql);
 
-        $preparedStatement->bindValue(':id', $user->getId(), \PDO::PARAM_INT);
+        $preparedStatement->bindValue(':id', $prof->getId(), \PDO::PARAM_INT);
 
         $preparedStatement->execute();
 
-        $user->setId(null);
+        $prof->setId(null);
 
     }
 
     /**
      * @param $id int
-     * @return User | null
+     * @return Prof | null
      */
     public function findById($id)
     {
@@ -118,27 +116,27 @@ class MysqlUserDao implements IUserDao
         if($row === false)
             return null;
 
-        return $this->makeUserFromRow($row);;
+        return $this->makeProfFromRow($row);;
 
 
     }
 
     /**
-     * @return multitpe:User
+     * @return multitpe:Prof
      */
     public function findAll()
     {
         $sql = "SELECT * FROM sgbdtrue.professeurs ORDER BY prenom, nom ASC";
         $statement = $this->pdo->query($sql);
 
-        $userList = [];
+        $profList = [];
         while(false !== ($row = $statement->fetch(\PDO::FETCH_ASSOC)))
         {
 
-            $userList[] =  $this->makeUserFromRow($row);
+            $profList[] =  $this->makeProfFromRow($row);
         }
 
-        return $userList;
+        return $profList;
     }
 
     public function findByEmail($email)
@@ -154,18 +152,17 @@ class MysqlUserDao implements IUserDao
         if($row === false)
             return null;
 
-        return $this->makeUserFromRow($row);;
+        return $this->makeProfFromRow($row);;
     }
 
-    private function makeUserFromRow(array $row)
+    private function makeProfFromRow(array $row)
     {
-        $user = new User();
-        $user->setId($row['id']);
-        $user->setEmail($row['email']);
-        $user->setprenom($row['prenom']);
-        $user->setnom($row['nom']);
-        $user->setGender($row['gender']);
-        return $user;
+        $prof = new Prof();
+        $prof->setId($row['id']);
+        $prof->setEmail($row['email']);
+        $prof->setPrenom($row['prenom']);
+        $prof->setNom($row['nom']);
+        return $prof;
     }
 
 

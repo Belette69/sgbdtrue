@@ -39,7 +39,7 @@ class Cours
     /**
      * @return string
      */
-    public function getintitule()
+    public function getIntitule()
     {
         return $this->intitule;
     }
@@ -47,7 +47,7 @@ class Cours
     /**
      * @param string $intitule
      */
-    public function setintitule($intitule)
+    public function setIntitule($intitule)
     {
         $this->intitule = $intitule;
     }
