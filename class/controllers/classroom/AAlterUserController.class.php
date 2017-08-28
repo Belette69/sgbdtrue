@@ -18,27 +18,13 @@ abstract class AAlterUserController implements IController
 
         $invalidFields = array();
 
-        $user->setFirstName(isset($_POST['firstName']) ? trim($_POST['firstName']) : "");
-        if($user->getFirstName() == "")
+        $user->setlocal(isset($_POST['local']) ? trim($_POST['local']) : "");
+        if($user->getlocal() == "")
         {
-            $invalidFields[] = 'firstName';
+            $invalidFields[] = 'local';
         }
 
-        $user->setLastName(isset($_POST['lastName']) ? trim($_POST['lastName']) : "");
-        if($user->getLastName() == "")
-        {
-            $invalidFields[] = 'lastName';
-        }
-
-        $user->setEmail(isset($_POST['email']) ? trim($_POST['email']) : "");
-        if($user->getEmail() == "" && filter_var($user->getEmail(), FILTER_VALIDATE_EMAIL))
-        {
-            $invalidFields[] = 'email';
-        }
-
-        $user->setGender(isset($_POST['gender']) ? trim($_POST['gender']) : Gender::M);
-
-        return $invalidFields;
+       
 
 
     }

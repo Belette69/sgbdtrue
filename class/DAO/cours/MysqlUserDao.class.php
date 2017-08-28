@@ -1,10 +1,10 @@
 <?php
 
 
-namespace sgbdtrue\DAO\classroom;
+namespace sgbdtrue\DAO\cours;
 
 
-use sgbdtrue\entities\classroom\User;
+use sgbdtrue\entities\cours\User;
 
 class MysqlUserDao implements IUserDao
 {
@@ -40,12 +40,12 @@ class MysqlUserDao implements IUserDao
     private function insert(User $user)
     {
 
-        $sql = "INSERT INTO sgbdtrue.classroom (id, local, last_name, gender, email) 
-                  VALUES (null, :local, :lastName, :gender, :email);";
+        $sql = "INSERT INTO sgbdtrue.cours (id, intitule, periode, gender, email) 
+                  VALUES (null, :intitule, :periode, :gender, :email);";
 
         $preparedStatement = $this->pdo->prepare($sql);
-        $preparedStatement->bindValue(':local', $user->getlocal(), \PDO::PARAM_STR);
-        $preparedStatement->bindValue(':lastName', $user->getLastName(), \PDO::PARAM_STR);
+        $preparedStatement->bindValue(':intitule', $user->getintitule(), \PDO::PARAM_STR);
+        $preparedStatement->bindValue(':periode', $user->getperiode(), \PDO::PARAM_STR);
         $preparedStatement->bindValue(':gender', $user->getGender(), \PDO::PARAM_STR);
         $preparedStatement->bindValue(':email', $user->getEmail(), \PDO::PARAM_STR);
 
@@ -64,11 +64,11 @@ class MysqlUserDao implements IUserDao
     private function update(User $user)
     {
 
-        $sql = "UPDATE labosgbd1.users SET local = :local, last_name = :lastName, gender = :gender, email = :email WHERE id = :id LIMIT 1";
+        $sql = "UPDATE labosgbd1.users SET intitule = :intitule, periode = :periode, gender = :gender, email = :email WHERE id = :id LIMIT 1";
 
         $preparedStatement = $this->pdo->prepare($sql);
-        $preparedStatement->bindValue(':local', $user->getlocal(), \PDO::PARAM_STR);
-        $preparedStatement->bindValue(':lastName', $user->getLastName(), \PDO::PARAM_STR);
+        $preparedStatement->bindValue(':intitule', $user->getintitule(), \PDO::PARAM_STR);
+        $preparedStatement->bindValue(':periode', $user->getperiode(), \PDO::PARAM_STR);
         $preparedStatement->bindValue(':gender', $user->getGender(), \PDO::PARAM_STR);
         $preparedStatement->bindValue(':email', $user->getEmail(), \PDO::PARAM_STR);
         $preparedStatement->bindValue(':id', $user->getId(), \PDO::PARAM_INT);
@@ -128,7 +128,7 @@ class MysqlUserDao implements IUserDao
      */
     public function findAll()
     {
-        $sql = "SELECT * FROM labosgbd1.users ORDER BY local, last_name ASC";
+        $sql = "SELECT * FROM labosgbd1.users ORDER BY intitule, periode ASC";
         $statement = $this->pdo->query($sql);
 
         $userList = [];
@@ -162,8 +162,8 @@ class MysqlUserDao implements IUserDao
         $user = new User();
         $user->setId($row['id']);
         $user->setEmail($row['email']);
-        $user->setlocal($row['local']);
-        $user->setLastName($row['last_name']);
+        $user->setintitule($row['intitule']);
+        $user->setperiode($row['periode']);
         $user->setGender($row['gender']);
         return $user;
     }

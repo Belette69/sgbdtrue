@@ -6,7 +6,7 @@
  */
 ?>
 <form action="" method="post" class="user-form">
-    <p>Are you sure to want remove the user : <?php echo htmlentities($user->getNom().' '.$user->getPrenom());?></p>
+    <p>Etes-vous sur de vouloir supprimer le cours suivant : <?php echo htmlentities($user->getintitule().);?></p>
     <p><input type="hidden" name="confirmed" value="YES"/></p>
     <p class="submit-container"><input type="submit" value="OK"/></p>
 </form>

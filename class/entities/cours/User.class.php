@@ -1,6 +1,6 @@
 <?php
 
-namespace sgbdtrue\entities\classroom;
+namespace sgbdtrue\entities\cours;
 
 
 class User
@@ -12,7 +12,7 @@ class User
     /**
      * @var string
      */
-    private $local;
+    private $intitule;
     /**
      * @var varchar
      */
@@ -39,17 +39,17 @@ class User
     /**
      * @return string
      */
-    public function getLocal()
+    public function getintitule()
     {
-        return $this->local;
+        return $this->intitule;
     }
 
     /**
-     * @param string $local
+     * @param string $intitule
      */
-    public function setLocal($local)
+    public function setintitule($intitule)
     {
-        $this->local = $local;
+        $this->intitule = $intitule;
     }
 
     

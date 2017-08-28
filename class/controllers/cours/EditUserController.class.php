@@ -9,12 +9,11 @@ use sgbdtrue\exceptions\classroom\InvalidActionException;
 use sgbdtrue\exceptions\classroom\InvalidDataException;
 use sgbdtrue\utils\classroom\ErrorMessageManager;
 use sgbdtrue\utils\classroom\MysqlConnection;
-use sgbdtrue\views\classroom\ConfirmUserDeletionView;
 use sgbdtrue\views\classroom\EditUserView;
 use sgbdtrue\views\classroom\HomeView;
 use sgbdtrue\controllers\IController;
 
-class DeleteUserController implements IController
+class EditUserController extends AAlterUserController implements IController
 {
 
     public function doAction()
@@ -41,16 +40,27 @@ class DeleteUserController implements IController
             if($user === null)
                 throw new InvalidActionException("Unable to retrieve the user with id ".$id);
 
+            $data['user'] = $user;
 
-            if(!isset($_POST['confirmed']))
+            if(!isset($_POST['id']))
             {
-                $view = new ConfirmUserDeletionView();
-                $view->showView(array('user'=> $user));
+                $view = new EditUserView();
+                $view->showView($data);
                 return;
             }
 
-            $userDao->delete($user);
-            ErrorMessageManager::getInstance()->addMessage("Local supprimé avec succes!");
+
+            //On a soumis le formulaire
+            $invalidFields = $this->validPostedDataAndSet($user);
+
+
+            if(count($invalidFields) > 0)
+                throw new InvalidDataException("Invalid submitted datas", $invalidFields);
+
+            $isTransactioStarted = $pdo->beginTransaction();
+            $userDao->insertOrUpdate($user);
+            $pdo->commit();
+
             header("Location: ".$_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"]);
 
 
@@ -58,7 +68,12 @@ class DeleteUserController implements IController
 
         catch (\Exception $ex)
         {
-
+            if($ex instanceof InvalidActionException)
+            {
+                ErrorMessageManager::getInstance()->addMessage($ex->getMessage());
+                header("Location: ".$_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"]);
+                return;
+            }
 
             if($ex instanceof  \PDOException && $ex->getCode() == 23000)
             {
@@ -68,13 +83,16 @@ class DeleteUserController implements IController
             else
                 $data['error'] = $ex->getMessage();
 
+            if($ex instanceof InvalidDataException)
+                $data['invalidFields'] = $ex->getInvalidData();
 
             if($isTransactioStarted)
                 $pdo->rollBack();
 
-            ErrorMessageManager::getInstance()->addMessage($ex->getMessage());
-            header("Location: ".$_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"]);
-            return;
+
+
+            $view = new EditUserView();
+            $view->showView($data);
 
 
 

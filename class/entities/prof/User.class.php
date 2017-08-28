@@ -49,7 +49,7 @@ class User
     /**
      * @return string
      */
-    public function getprenom()
+    public function getPrenom()
     {
         return $this->prenom;
     }
@@ -57,7 +57,7 @@ class User
     /**
      * @param string $prenom
      */
-    public function setprenom($prenom)
+    public function setPrenom($prenom)
     {
         $this->prenom = $prenom;
     }
@@ -65,7 +65,7 @@ class User
     /**
      * @return string
      */
-    public function getnom()
+    public function getNom()
     {
         return $this->nom;
     }
@@ -73,7 +73,7 @@ class User
     /**
      * @param string $nom
      */
-    public function setnom($nom)
+    public function setNom($nom)
     {
         $this->nom = $nom;
     }

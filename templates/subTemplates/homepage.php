@@ -11,5 +11,9 @@
 <div><a href="index.php?action=home&amp;entities=classroom">Liste des classes</a></div>
 <div><a href="index.php?action=create&amp;entities=secretariat">Ajouter secretaire</a></div>
 <div><a href="index.php?action=home&amp;entities=secretariat">Liste des secretaires</a></div>
+<div><a href="index.php?action=create&amp;entities=cours">Ajouter un cours</a></div>
+<div><a href="index.php?action=home&amp;entites=cours">Liste des cours</a></div>
+<div><a href="index.php?action=create&amp;entities=inscription">Ajouter une inscription</a></div>
+<div><a href="index.php?action=home&amp;entities=inscription">Liste des inscriptions</a></div>
 <?php
 //include __DIR__.DIRECTORY_SEPARATOR.'usersList.php';

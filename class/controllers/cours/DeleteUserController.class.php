@@ -1,17 +1,17 @@
 <?php
 
 
-namespace sgbdtrue\controllers\prof;
+namespace sgbdtrue\controllers\cours;
 
 
-use sgbdtrue\DAO\prof\MysqlUserDao;
-use sgbdtrue\exceptions\prof\InvalidActionException;
-use sgbdtrue\exceptions\prof\InvalidDataException;
-use sgbdtrue\utils\prof\ErrorMessageManager;
-use sgbdtrue\utils\prof\MysqlConnection;
-use sgbdtrue\views\prof\ConfirmUserDeletionView;
-use sgbdtrue\views\prof\EditUserView;
-use sgbdtrue\views\prof\HomeView;
+use sgbdtrue\DAO\cours\MysqlUserDao;
+use sgbdtrue\exceptions\cours\InvalidActionException;
+use sgbdtrue\exceptions\cours\InvalidDataException;
+use sgbdtrue\utils\cours\ErrorMessageManager;
+use sgbdtrue\utils\cours\MysqlConnection;
+use sgbdtrue\views\cours\ConfirmUserDeletionView;
+use sgbdtrue\views\cours\EditUserView;
+use sgbdtrue\views\cours\HomeView;
 use sgbdtrue\controllers\IController;
 
 class DeleteUserController implements IController
@@ -50,7 +50,7 @@ class DeleteUserController implements IController
             }
 
             $userDao->delete($user);
-            ErrorMessageManager::getInstance()->addMessage("Enseignent supprimé avec succes!");
+            ErrorMessageManager::getInstance()->addMessage("cours supprimé avec succes!");
             header("Location: ".$_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"]);
 
 

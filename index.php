@@ -19,6 +19,14 @@ if(isset($_GET['entities']))
     {
         $entities='classroom';
     }
+    else if($_GET['entities']=='cours')
+    {
+        $entities='cours';
+    }
+    else if($_GET['entities']=='inscritpion')
+    {
+        $entities='inscription';
+    }
     else
     {
         $entities='Homepage';
