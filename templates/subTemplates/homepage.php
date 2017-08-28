@@ -1,0 +1,15 @@
+<h1>GESTION D'ETABLISSEMENT SCOLAIRE</h1>
+<?php
+
+
+?>
+<div><a href="index.php?action=create&amp;entities=user">Ajouter etudiant</a></div>
+<div><a href="index.php?action=home&amp;entities=user">liste des etudiants</a></div>
+<div><a href="index.php?action=create&amp;entities=prof">Ajouter professeur</a></div>
+<div><a href="index.php?action=home&amp;entities=prof">Liste des professeurs</a></div>
+<div><a href="index.php?action=create&amp;entities=classroom">Ajouter classe</a></div>
+<div><a href="index.php?action=home&amp;entities=classroom">Liste des classes</a></div>
+<div><a href="index.php?action=create&amp;entities=secretariat">Ajouter secretaire</a></div>
+<div><a href="index.php?action=home&amp;entities=secretariat">Liste des secretaires</a></div>
+<?php
+//include __DIR__.DIRECTORY_SEPARATOR.'usersList.php';
