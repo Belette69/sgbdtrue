@@ -6,8 +6,8 @@ namespace sgbdtrue\controllers\prof;
 
 use sgbdtrue\DAO\prof\MysqlProfDao;
 use sgbdtrue\entities\prof\Prof;
-use sgbdtrue\utils\prof\MysqlConnection;
-use sgbdtrue\views\prof\HomeView;
+use sgbdtrue\utils\MysqlConnection;
+use sgbdtrue\views\prof\ShowProfView;
 use sgbdtrue\controllers\IController;
 
 class ShowProfController implements IController
@@ -29,7 +29,7 @@ class ShowProfController implements IController
         {
             $data['error'] = "Service indisponible";
         }
-        $view = new HomeView();
+        $view = new ShowProfView();
         $view->showView($data);
 
     }

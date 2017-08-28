@@ -8,13 +8,13 @@ if(!isset($prof) || !($prof instanceof Prof))
 ?>
 <form action="./" method="post" class="user-form">
     <p>
-        <label for="prenom">Prénom</label><input <?php echo isset($invalidFields) && in_array('prenom', $invalidFields) ? 'class="error"' : ""?> type="text" required="required" name="prenom" id="prenom" value="<?php echo htmlentities($user->getprenom(), ENT_QUOTES);?>"/>
+        <label for="prenom">Prénom</label><input <?php echo isset($invalidFields) && in_array('prenom', $invalidFields) ? 'class="error"' : ""?> type="text" required="required" name="prenom" id="prenom" value="<?php echo htmlentities($prof->getPrenom(), ENT_QUOTES);?>"/>
     </p>
     <p>
-        <label for="nom">Nom</label><input <?php echo isset($invalidFields) && in_array('nom', $invalidFields) ? 'class="error"' : ""?>  type="text" required="required" name="nom" id="nom" value="<?php echo htmlentities($user->getnom(), ENT_QUOTES);?>"/>
+        <label for="nom">Nom</label><input <?php echo isset($invalidFields) && in_array('nom', $invalidFields) ? 'class="error"' : ""?>  type="text" required="required" name="nom" id="nom" value="<?php echo htmlentities($prof->getNom(), ENT_QUOTES);?>"/>
     </p>
     <p>
-        <label for="email">Email</label><input <?php echo (isset($invalidFields) && in_array('email', $invalidFields)) ? 'class="error"' : ""?>  type="email" required="required" name="email" id="email" value="<?php echo htmlentities($user->getEmail(), ENT_QUOTES);?>"/>
+        <label for="email">Email</label><input <?php echo (isset($invalidFields) && in_array('email', $invalidFields)) ? 'class="error"' : ""?>  type="email" required="required" name="email" id="email" value="<?php echo htmlentities($prof->getEmail(), ENT_QUOTES);?>"/>
     </p>
 
 

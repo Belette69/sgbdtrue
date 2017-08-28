@@ -23,7 +23,7 @@ class MysqlProfDao implements IProfDao
      * @return void
      * @throws \PDOException
      */
-    public function insertOrUpdate(Prof $user)
+    public function insertOrUpdate(Prof $prof)
     {
         if($prof->getId() === null)
             $this->insert($prof);

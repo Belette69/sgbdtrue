@@ -7,8 +7,8 @@ namespace sgbdtrue\controllers\prof;
 use sgbdtrue\DAO\prof\MysqlProfDao;
 use sgbdtrue\entities\prof\Gender;
 use sgbdtrue\entities\prof\Prof;
-use sgbdtrue\exceptions\prof\InvalidDataException;
-use sgbdtrue\utils\prof\MysqlConnection;
+use sgbdtrue\exceptions\InvalidDataException;
+use sgbdtrue\MysqlConnection;
 use sgbdtrue\views\prof\CreateProfView;
 use sgbdtrue\views\prof\HomeView;
 use sgbdtrue\controllers\IController;
@@ -45,7 +45,8 @@ class CreateProfController extends AAlterProfController implements IController
 
             $profDao->insertOrUpdate($prof);
             $pdo->commit();
-            header("Location: ".$_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"]);
+           header("Location: index.php?action=home&entities=prof"); 
+            
 
 
         }
