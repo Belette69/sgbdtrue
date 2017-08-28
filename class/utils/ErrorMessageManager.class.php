@@ -1,7 +1,7 @@
 <?php
 
 
-namespace sgbdtrue\utils\secretariat;
+namespace sgbdtrue\utils;
 
 
 class ErrorMessageManager

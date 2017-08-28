@@ -1,5 +1,5 @@
 <?php
-namespace sgbdtrue\exceptions\prof;
+namespace sgbdtrue\exceptions;
 
 class InvalidActionException extends \Exception
 {

@@ -3,7 +3,7 @@
 
 
 ?>
-<div><a href="index.php?action=create&amp;entities=user">Add new user</a></div>
+<div><a href="index.php?action=create&amp;entities=prof">Add new prof</a></div>
 
 <?php
-include __DIR__.DIRECTORY_SEPARATOR.'usersList.php';
+include __DIR__.DIRECTORY_SEPARATOR.'profList.php';

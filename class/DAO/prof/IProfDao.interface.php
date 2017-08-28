@@ -2,32 +2,32 @@
 namespace sgbdtrue\DAO\prof;
 
 
-use sgbdtrue\entities\prof\User;
+use sgbdtrue\entities\prof\Prof;
 
-interface IUserDao
+interface IProfDao
 {
     /**
-     * @param User $user
+     * @param Prof $prof
      * @return void
      * @throws \PDOException
      */
-    public function insertOrUpdate(User $user);
+    public function insertOrUpdate(Prof $prof);
 
     /**
-     * @param User $user
+     * @param Prof $prof
      * @return void
      * @throws \PDOException, \LogicException
      */
-    public function delete(User $user);
+    public function delete(Prof $prof);
 
     /**
      * @param $id int
-     * @return User | null
+     * @return Prof | null
      */
     public function findById($id);
 
     /**
-     * @return multitpe:User
+     * @return multitpe:Prof
      */
     public function findAll();
 

@@ -18,10 +18,7 @@ class Prof
      */
     private $nom;
 
-    /**
-     * @var string | défini dans la classe Gender
-     */
-    private $gender;
+   
     /**
      * @var string
      */
@@ -81,27 +78,7 @@ class Prof
     /**
      * @return défini|string
      */
-    public function getGender()
-    {
-        return $this->gender;
-    }
-
-    /**
-     * @param défini|string $gender
-     */
-    public function setGender($gender)
-    {
-        if($gender == Gender::F)
-            $this->gender = $gender;
-        else
-            $this->gender = Gender::M;
-
-
-    }
-
-    /**
-     * @return string
-     */
+    
     public function getEmail()
     {
         return $this->email;

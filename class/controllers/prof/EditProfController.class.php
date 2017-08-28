@@ -4,16 +4,16 @@
 namespace sgbdtrue\controllers\prof;
 
 
-use sgbdtrue\DAO\prof\MysqlUserDao;
+use sgbdtrue\DAO\prof\MysqlProfDao;
 use sgbdtrue\exceptions\prof\InvalidActionException;
 use sgbdtrue\exceptions\prof\InvalidDataException;
 use sgbdtrue\utils\prof\ErrorMessageManager;
 use sgbdtrue\utils\prof\MysqlConnection;
-use sgbdtrue\views\prof\EditUserView;
+use sgbdtrue\views\prof\EditProfView;
 use sgbdtrue\views\prof\HomeView;
 use sgbdtrue\controllers\IController;
 
-class EditUserController extends AAlterUserController implements IController
+class EditProfController extends AAlterProfController implements IController
 {
 
     public function doAction()
@@ -32,33 +32,33 @@ class EditUserController extends AAlterUserController implements IController
 
 
             $pdo = MysqlConnection::getConnection();
-            $userDao = new MysqlUserDao($pdo);
+            $profDao = new MysqlProfDao($pdo);
 
 
-            $user = $userDao->findById($id);
+            $prof = $profDao->findById($id);
 
-            if($user === null)
-                throw new InvalidActionException("Unable to retrieve the user with id ".$id);
+            if($prof === null)
+                throw new InvalidActionException("Unable to retrieve the prof with id ".$id);
 
-            $data['user'] = $user;
+            $data['prof'] = $prof;
 
             if(!isset($_POST['id']))
             {
-                $view = new EditUserView();
+                $view = new EditProfView();
                 $view->showView($data);
                 return;
             }
 
 
             //On a soumis le formulaire
-            $invalidFields = $this->validPostedDataAndSet($user);
+            $invalidFields = $this->validPostedDataAndSet($prof);
 
 
             if(count($invalidFields) > 0)
                 throw new InvalidDataException("Invalid submitted datas", $invalidFields);
 
             $isTransactioStarted = $pdo->beginTransaction();
-            $userDao->insertOrUpdate($user);
+            $profDao->insertOrUpdate($prof);
             $pdo->commit();
 
             header("Location: ".$_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"]);
@@ -91,7 +91,7 @@ class EditUserController extends AAlterUserController implements IController
 
 
 
-            $view = new EditUserView();
+            $view = new EditProfView();
             $view->showView($data);
 
 

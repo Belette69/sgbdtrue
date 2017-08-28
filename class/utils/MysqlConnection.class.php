@@ -1,5 +1,5 @@
 <?php
-namespace sgbdtrue\utils\classroom;
+namespace sgbdtrue\utils;
 
 
 class MysqlConnection

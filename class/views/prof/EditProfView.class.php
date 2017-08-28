@@ -3,18 +3,18 @@
 namespace sgbdtrue\views\prof;
 
 
-class ConfirmUserDeletionView extends AView implements IView
+class EditProfView extends AView implements IView
 {
 
 
     protected  function getTemplateNameWithoutExt()
     {
-        return 'prof\confirmSupp';
+        return 'prof\editProf';
     }
 
     protected  function getTitle()
     {
-        return "Confirm deletion";
+        return "Edit prof";
     }
 
 }
