@@ -39,7 +39,7 @@ class User
     /**
      * @return string
      */
-    public function getintitule()
+    public function getIntitule()
     {
         return $this->intitule;
     }
@@ -47,7 +47,7 @@ class User
     /**
      * @param string $intitule
      */
-    public function setintitule($intitule)
+    public function setIntitule($intitule)
     {
         $this->intitule = $intitule;
     }
