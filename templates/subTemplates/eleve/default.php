@@ -4,10 +4,10 @@
 <div class="container-fluid">
 <div class="row">
     <div class="col">
-      <a href="index.php" class="btn btn-primary">Home</a>
+      <a href="index.php" class="btn btn-dark">Home</a>
     </div>
     <div class="col">
-    <a href="index.php?action=create&amp;entities=eleve" class="btn btn-primary">Ajouter un nouvel élève</a>
+    <a href="index.php?action=create&amp;entities=eleve" class="btn btn-dark">Ajouter un nouvel élève</a>
     </div>
   </div>
 </div>

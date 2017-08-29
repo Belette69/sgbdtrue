@@ -2,10 +2,10 @@
 <div class="container-fluid">
 <div class="row">
     <div class="col">
-      <a href="index.php" class="btn btn-primary">Home</a>
+      <a href="index.php" class="btn btn-dark">Home</a>
     </div>
     <div class="col">
-    <a href="index.php?action=create&amp;entities=secretariat" class="btn btn-primary">Ajouter un nouveau secrétaire</a>
+    <a href="index.php?action=create&amp;entities=secretariat" class="btn btn-dark">Ajouter un nouveau secrétaire</a>
     </div>
   </div>
 </div>

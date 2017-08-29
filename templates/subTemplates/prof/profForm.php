@@ -4,10 +4,10 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col">
-      <a href="index.php" class="btn btn-primary">Home</a>
+      <a href="index.php" class="btn btn-dark">Home</a>
     </div>
     <div class="col">
-    <a href="index.php?action=home&entities=prof" class="btn btn-primary">Back</a>
+    <a href="index.php?action=home&entities=prof" class="btn btn-dark">Back</a>
     </div>
   </div>
 </div>
@@ -23,6 +23,6 @@
     </p>
 
 
-    <p class="submit-container"><input type="submit" value="VALIDER"/></p>
+    <p class="submit-container"><input type="submit" class="btn btn-dark" value="VALIDER"/></p>
     <input type="hidden" name="id" value="<?php echo htmlentities($prof->getId()); ?>"/>
 </form>

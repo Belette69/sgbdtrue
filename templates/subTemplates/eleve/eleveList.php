@@ -1,4 +1,19 @@
-
+<style>
+a:hover {
+color: red;
+}
+a{
+    color:black;
+    text-decoration:underline;
+    font-style: italic;
+}
+th{
+    text-align: center;
+}
+td{
+    text-align: center;
+}
+</style>
 <table class="table table-striped">
     <thead class="thead-inverse">
     <tr>

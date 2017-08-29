@@ -1,4 +1,19 @@
-
+<style>
+a:hover {
+color: red;
+}
+a{
+    color:black;
+    text-decoration:underline;
+    font-style: italic;
+}
+th{
+    text-align: center;
+}
+td{
+    text-align: center;
+}
+</style>
 <table class="table table-striped">
     <thead class="thead-inverse">
     <tr>
@@ -24,8 +39,8 @@
             <td><?php echo htmlentities($prof->getPrenom());?></td>
             <td><?php echo htmlentities($prof->getNom());?></td>
             <td><?php echo htmlentities($prof->getEmail());?></td>
-            <td><a href="index.php?action=edit&amp;entities=prof&amp;id=<?php  echo htmlentities($prof->getId(), ENT_QUOTES) ?>">Edit</a></td>
-            <td><a href="index.php?action=delete&amp;entities=prof&amp;id=<?php echo htmlentities($prof->getId(), ENT_QUOTES) ?>">Remove</a></td>
+            <td><a href="index.php?action=edit&amp;entities=prof&amp;id=<?php  echo htmlentities($prof->getId(), ENT_QUOTES) ?>">Editer</a></td>
+            <td><a href="index.php?action=delete&amp;entities=prof&amp;id=<?php echo htmlentities($prof->getId(), ENT_QUOTES) ?>">Supprimer</a></td>
 
         </tr>
         <?php
