@@ -12,14 +12,27 @@ class Secretariat
     /**
      * @var string
      */
+    private $nom;
+    /**
+     * @var string
+     */
     private $prenom;
     /**
      * @var string
      */
-    private $nom;
-
     private $email;
-
+    /**
+     * @var string
+     */
+    private $pseudo;
+    /**
+     * @var string
+     */
+    private $password;
+    /**
+     * @var int
+     */
+    private $numero;
     /**
      * @return int
      */
@@ -42,6 +55,22 @@ class Secretariat
     /**
      * @return string
      */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * @param string $nom
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+    }
+
+    /**
+     * @return string
+     */
     public function getPrenom()
     {
         return $this->prenom;
@@ -56,21 +85,8 @@ class Secretariat
     }
 
     /**
-     * @return string
+     * @return défini|string
      */
-    public function getNom()
-    {
-        return $this->nom;
-    }
-
-    /**
-     * @param string $nom
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-    }
-
 
     /**
      * @return string
@@ -87,6 +103,52 @@ class Secretariat
     {
         $this->email = $email;
     }
+        /**
+     * @return string
+     */
+    public function getPseudo()
+    {
+        return $this->pseudo;
+    }
+
+    /**
+     * @param string $pseudo
+     */
+    public function setPseudo($pseudo)
+    {
+        $this->pseudo = $pseudo;
+    }
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+    /**
+     * @return string
+     */
+    public function getNumero()
+    {
+        return $this->numero;
+    }
+
+    /**
+     * @param string $numero
+     */
+    public function setNumero($numero)
+    {
+        $this->numero = $numero;
+    }
+
 
 
 

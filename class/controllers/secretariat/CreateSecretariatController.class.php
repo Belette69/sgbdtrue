@@ -4,24 +4,27 @@
 namespace sgbdtrue\controllers\secretariat;
 
 
-use sgbdtrue\DAO\secretariat\MysqlUserDao;
-use sgbdtrue\entities\secretariat\Gender;
-use sgbdtrue\entities\secretariat\User;
-use sgbdtrue\exceptions\secretariat\InvalidDataException;
-use sgbdtrue\utils\secretariat\MysqlConnection;
-use sgbdtrue\views\secretariat\CreateUserView;
-use sgbdtrue\views\secretariat\HomeView;
+use sgbdtrue\DAO\secretariat\MysqlSecretariatDao;
+use sgbdtrue\entities\secretariat\Secretariat;
+use sgbdtrue\exceptions\InvalidDataException;
+use sgbdtrue\utils\MysqlConnection;
+use sgbdtrue\views\secretariat\CreateSecretariatView;
+use sgbdtrue\views\secretariat\ShowSecretariatView;
 use sgbdtrue\controllers\IController;
 
-class CreateUserController extends AAlterUserController implements IController
+
+
+
+
+class CreateSecretariatController extends AAlterSecretariatController implements IController
 {
     public function doAction()
-    {
+     {
+        
 
-
-        $user = new User();
-        $data['user'] = $user;
-        $data['userList'] = array();
+        $secretariat = new Secretariat();
+        $data['secretariat'] = $secretariat;
+        $data['secretariatList'] = array();
         $pdo = null;
         $isTransactioStarted = false;
         $data = array();
@@ -30,24 +33,25 @@ class CreateUserController extends AAlterUserController implements IController
 
             if(!isset($_POST['id']))
             {
-                $view = new CreateUserView();
+                $view = new CreateSecretariatView();
                 $view->showView($data);
                 return;
             }
-            $invalidFields = $this->validPostedDataAndSet($user);
+            
+            
+            $invalidFields = $this->validPostedDataAndSet($secretariat);
 
             if(count($invalidFields) > 0)
                 throw new InvalidDataException("Invalid submitted datas", $invalidFields);
 
             $pdo = MysqlConnection::getConnection();
-            $userDao = new MysqlUserDao($pdo);
+            $secretariatDao = new MysqlSecretariatDao($pdo);
             $isTransactioStarted = $pdo->beginTransaction();
 
-            $userDao->insertOrUpdate($user);
+            $secretariatDao->insertOrUpdate($secretariat);
             $pdo->commit();
-            header("Location: ".$_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"]);
-
-
+            header("Location: index.php?action=home&entities=secretariat");
+                
         }
        catch (\Exception $ex)
        {
@@ -65,7 +69,7 @@ class CreateUserController extends AAlterUserController implements IController
            if($isTransactioStarted)
                $pdo->rollBack();
 
-           $view = new CreateUserView();
+           $view = new CreateSecretariatView();
            $view->showView($data);
 
        }

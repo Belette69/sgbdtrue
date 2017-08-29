@@ -4,17 +4,17 @@
 namespace sgbdtrue\controllers\secretariat;
 
 
-use sgbdtrue\DAO\secretariat\MysqlUserDao;
+use sgbdtrue\DAO\secretariat\MysqlSecretariatDao;
 use sgbdtrue\exceptions\secretariat\InvalidActionException;
 use sgbdtrue\exceptions\secretariat\InvalidDataException;
-use sgbdtrue\utils\secretariat\ErrorMessageManager;
-use sgbdtrue\utils\secretariat\MysqlConnection;
-use sgbdtrue\views\secretariat\ConfirmUserDeletionView;
-use sgbdtrue\views\secretariat\EditUserView;
+use sgbdtrue\utils\ErrorMessageManager;
+use sgbdtrue\utils\MysqlConnection;
+use sgbdtrue\views\secretariat\ConfirmSecretariatDeletionView;
+use sgbdtrue\views\secretariat\EditSecretariatView;
 use sgbdtrue\views\secretariat\HomeView;
 use sgbdtrue\controllers\IController;
 
-class DeleteUserController implements IController
+class DeleteSecretariatController implements IController
 {
 
     public function doAction()
@@ -33,25 +33,28 @@ class DeleteUserController implements IController
 
 
             $pdo = MysqlConnection::getConnection();
-            $userDao = new MysqlUserDao($pdo);
+            $secretariatDao = new MysqlSecretariatDao($pdo);
 
 
-            $user = $userDao->findById($id);
+            $secretariat = $secretariatDao->findById($id);
+            
 
-            if($user === null)
-                throw new InvalidActionException("Unable to retrieve the user with id ".$id);
+            if($secretariat === null)
+                throw new InvalidActionException("Unable to retrieve the secretariat with id ".$id);
 
 
             if(!isset($_POST['confirmed']))
             {
-                $view = new ConfirmUserDeletionView();
-                $view->showView(array('user'=> $user));
+                $view = new ConfirmSecretariatDeletionView();
+                $view->showView(array('secretariat'=> $secretariat));
                 return;
             }
+            
+            $secretariatDao->delete($secretariat);
+            
+            ErrorMessageManager::getInstance()->addMessage("Secretaire supprimé avec succes!");
+            header("Location: index.php?action=home&entities=secretariat");
 
-            $userDao->delete($user);
-            ErrorMessageManager::getInstance()->addMessage("User removed with seccess!");
-            header("Location: ".$_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"]);
 
 
         }

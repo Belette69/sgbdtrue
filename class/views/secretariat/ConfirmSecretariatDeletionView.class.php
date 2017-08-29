@@ -2,8 +2,9 @@
 
 namespace sgbdtrue\views\secretariat;
 
-
-class ConfirmUserDeletionView extends AView implements IView
+use sgbdtrue\views\AView;
+use sgbdtrue\views\IView;
+class ConfirmSecretariatDeletionView extends AView implements IView
 {
 
 

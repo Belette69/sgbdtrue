@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title><?php echo $title ?></title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css" rel="stylesheet" integrity="sha384-Xqcy5ttufkC3rBa8EdiAyA1VgOGrmel2Y+wxm4K3kI3fcjTWlDWrlnxyD6hOi3PF" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
     <style>
+
     
     </style>
-
-    
-    
-        
-
-
-    
 </head>
+<div class="container">
 <body>
     <?php
     if(isset($error))
@@ -42,5 +38,7 @@
 
 
     ?>
+
 </body>
+</div>  
 </html>
