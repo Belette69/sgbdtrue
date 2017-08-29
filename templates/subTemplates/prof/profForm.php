@@ -1,6 +1,16 @@
 <?php
 
 ?>
+<div class="container-fluid">
+<div class="row">
+<div class="col">
+      <a href="index.php" class="btn btn-primary">Home</a>
+    </div>
+    <div class="col">
+    <a href="index.php?action=home&entities=prof" class="btn btn-primary">Back</a>
+    </div>
+  </div>
+</div>
 <form action="" method="post" class="user-form">
     <p>
         <label for="prenom">Prénom</label><input <?php echo isset($invalidFields) && in_array('prenom', $invalidFields) ? 'class="error"' : ""?> type="text" required="required" class="form-control" name="prenom" id="prenom" value="<?php echo htmlentities($prof->getPrenom(), ENT_QUOTES);?>"/>

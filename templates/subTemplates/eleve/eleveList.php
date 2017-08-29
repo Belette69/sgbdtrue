@@ -1,6 +1,6 @@
 
-<table>
-    <thead>
+<table class="table table-striped">
+    <thead class="thead-inverse">
     <tr>
         <th>Id</th>
         <th>Nom</th>

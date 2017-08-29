@@ -1,4 +1,13 @@
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <a href="index.php" class="btn btn-primary">Home</a>
+        </div>
+        <div class="col">
+            <a href="index.php?action=home&entities=eleve" class="btn btn-primary">Back</a>
+        </div>
+    </div>
+</div>
 <form action="" method="post" class="eleve-form">
     <p>
         

@@ -6,6 +6,16 @@ use \sgbdtrue\entities\secretariat\Secretariat;
 if(!isset($secretariat) || !($secretariat instanceof Secretariat))
     $secretariat = new Secretariat();;
 ?>
+<div class="container-fluid">
+<div class="row">
+<div class="col">
+      <a href="index.php" class="btn btn-primary">Home</a>
+    </div>
+    <div class="col">
+    <a href="index.php?action=home&entities=secretariat" class="btn btn-primary">Back</a>
+    </div>
+  </div>
+</div>
 <form action="" method="post" class="user-form">
     <p>
         <label for="nom">Nom </label><input <?php echo isset($invalidFields) && in_array('nom', $invalidFields) ? 'class="error"' : ""?> type="text" required="required" class="form-control" name="nom" id="nom" value="<?php echo htmlentities($secretariat->getNom(), ENT_QUOTES);?>"/>
