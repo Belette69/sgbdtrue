@@ -2,32 +2,32 @@
 namespace sgbdtrue\DAO\cours;
 
 
-use sgbdtrue\entities\cours\User;
+use sgbdtrue\entities\cours\Cours;
 
-interface IUserDao
+interface ICoursDao
 {
     /**
-     * @param User $user
+     * @param Cours $cours
      * @return void
      * @throws \PDOException
      */
-    public function insertOrUpdate(User $user);
+    public function insertOrUpdate(Cours $cours);
 
     /**
-     * @param User $user
+     * @param Cours $cours
      * @return void
      * @throws \PDOException, \LogicException
      */
-    public function delete(User $user);
+    public function delete(Cours $cours);
 
     /**
      * @param $id int
-     * @return User | null
+     * @return Cours | null
      */
     public function findById($id);
 
     /**
-     * @return multitpe:User
+     * @return multiple:Cours
      */
     public function findAll();
 

@@ -20,14 +20,13 @@ class CreateEleveController extends AAlterEleveController implements IController
 {
     public function doAction()
      {
-        
-
+        $data = array();
         $eleve = new Eleve();
         $data['eleve'] = $eleve;
         $data['eleveList'] = array();
         $pdo = null;
         $isTransactioStarted = false;
-        $data = array();
+        
        try
         {
 

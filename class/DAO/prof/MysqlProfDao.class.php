@@ -139,20 +139,16 @@ class MysqlProfDao implements IProfDao
         return $profList;
     }
 
-    public function findByEmail($email)
+    public function getIds()
     {
-        $sql = "SELECT * FROM sgbdtrue.professeurs  WHERE email = :email LIMIT 1";
-        $preparedStatement = $this->pdo->prepare($sql);
-        $preparedStatement->bindValue(':email', $email, \PDO::PARAM_INT);
-
-        $preparedStatement->execute();
-
-        $row = $preparedStatement->fetch(\PDO::FETCH_ASSOC);
-
-        if($row === false)
-            return null;
-
-        return $this->makeProfFromRow($row);;
+        $sql="SELECT id FROM sgbdtrue.professeurs ORDER BY id";
+        $statement=$this->pdo->query($sql);
+        $idList=[];
+        while(false!==($row=$statement->fetch(\PDO::FETCH_ASSOC)))
+        {
+            $idList[]=$row['id'];
+        }
+        return $idList;
     }
 
     private function makeProfFromRow(array $row)

@@ -88,7 +88,7 @@ class MysqlEleveDao implements IEleveDao
         if($eleve->getId() === null)
             throw new \LogicException("Id can't be null");
 
-        $sql = "DELETE FROM sgbdtrue.eleves  WHERE Id = :id LIMIT 1";
+        $sql = "DELETE FROM sgbdtrue.eleves  WHERE id = :id LIMIT 1";
 
         $preparedStatement = $this->pdo->prepare($sql);
 

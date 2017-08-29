@@ -1,11 +1,4 @@
-<?php
-use \sgbdtrue\entities\eleve\Eleve;
-/**
- * @var \sgbdtrue\entities\Eleve $eleve
- */
-if(!isset($eleve) || !($eleve instanceof Eleve))
-    $eleve = new Eleve();;
-?>
+
 <form action="" method="post" class="eleve-form">
     <p>
         
