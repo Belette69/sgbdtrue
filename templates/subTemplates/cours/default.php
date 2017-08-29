@@ -1,9 +1,9 @@
-<h1>User management</h1>
+<h1>Gestion des cours</h1>
 <?php
 
 
 ?>
-<div><a href="index.php?action=create&amp;entities=user">Add new user</a></div>
+<div><a href="index.php?action=create&amp;entities=cours">Ajouter un nouveau cours</a></div>
 
 <?php
-include __DIR__.DIRECTORY_SEPARATOR.'usersList.php';
+include __DIR__.DIRECTORY_SEPARATOR.'coursList.php';

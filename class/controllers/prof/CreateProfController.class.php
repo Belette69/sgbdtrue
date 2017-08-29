@@ -18,13 +18,13 @@ class CreateProfController extends AAlterProfController implements IController
     public function doAction()
     {
 
-
+        $data = array();
         $prof = new Prof();
         $data['prof'] = $prof;
         $data['profList'] = array();
         $pdo = null;
         $isTransactioStarted = false;
-        $data = array();
+        
        try
         {
 

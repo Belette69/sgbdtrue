@@ -1,10 +1,5 @@
 <?php
-use \sgbdtrue\entities\prof\Prof;
-/**
- * @var \sgbdtrue\entities\Prof $prof
- */
-if(!isset($prof) || !($prof instanceof Prof))
-    $prof = new Prof();;
+
 ?>
 <form action="" method="post" class="user-form">
     <p>

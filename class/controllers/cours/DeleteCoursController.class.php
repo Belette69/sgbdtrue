@@ -4,17 +4,17 @@
 namespace sgbdtrue\controllers\cours;
 
 
-use sgbdtrue\DAO\cours\MysqlUserDao;
+use sgbdtrue\DAO\cours\MysqlCoursDao;
 use sgbdtrue\exceptions\cours\InvalidActionException;
 use sgbdtrue\exceptions\cours\InvalidDataException;
-use sgbdtrue\utils\cours\ErrorMessageManager;
-use sgbdtrue\utils\cours\MysqlConnection;
-use sgbdtrue\views\cours\ConfirmUserDeletionView;
-use sgbdtrue\views\cours\EditUserView;
+use sgbdtrue\utils\ErrorMessageManager;
+use sgbdtrue\utils\MysqlConnection;
+use sgbdtrue\views\cours\ConfirmCoursDeletionView;
+use sgbdtrue\views\cours\EditCoursView;
 use sgbdtrue\views\cours\HomeView;
 use sgbdtrue\controllers\IController;
 
-class DeleteUserController implements IController
+class DeleteCoursController implements IController
 {
 
     public function doAction()
@@ -33,25 +33,25 @@ class DeleteUserController implements IController
 
 
             $pdo = MysqlConnection::getConnection();
-            $userDao = new MysqlUserDao($pdo);
+            $coursDao = new MysqlCoursDao($pdo);
 
 
-            $user = $userDao->findById($id);
+            $cours = $coursDao->findById($id);
 
-            if($user === null)
-                throw new InvalidActionException("Unable to retrieve the user with id ".$id);
+            if($cours === null)
+                throw new InvalidActionException("Unable to retrieve the cours with id ".$id);
 
 
             if(!isset($_POST['confirmed']))
             {
-                $view = new ConfirmUserDeletionView();
-                $view->showView(array('user'=> $user));
+                $view = new ConfirmCoursDeletionView();
+                $view->showView(array('cours'=> $cours));
                 return;
             }
 
-            $userDao->delete($user);
+            $coursDao->delete($cours);
             ErrorMessageManager::getInstance()->addMessage("cours supprimé avec succes!");
-            header("Location: ".$_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"]);
+            header("Location: index.php?action=home&entities=cours");
 
 
         }

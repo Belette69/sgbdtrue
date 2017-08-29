@@ -1,11 +1,4 @@
-<?php
-use \sgbdtrue\entities\eleve\Eleve;
-/**
- * @var \sgbdtrue\entities\Eleve $eleve
- */
-if(!isset($eleve) || !($eleve instanceof Eleve))
-    $eleve = new Eleve();;
-?>
+
 <form action="" method="post" class="eleve-form">
     <p>
         <label for="nom">Nom</label><input <?php echo isset($invalidFields) && in_array('nom', $invalidFields) ? 'class="error"' : ""?> type="text" required="required" name="nom" id="nom" value="<?php echo htmlentities($eleve->getNom(), ENT_QUOTES);?>"/>

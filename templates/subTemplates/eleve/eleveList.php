@@ -13,12 +13,8 @@
     <tbody>
     <?php
     for($i=0, $count=count($eleveList); $i<$count; ++$i):
-        /**
-         * @var \sgbdtrue\entities\Eleve $eleve
-         */
         $eleve = $eleveList[$i];
-        //if(!($eleve instanceof \sgbdtrue\entities\Eleve))
-           // continue;
+
         ?>
         <tr>
             <td><?php echo htmlentities($eleve->getId());?></td>
