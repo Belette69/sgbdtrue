@@ -4,17 +4,18 @@ namespace sgbdtrue\views\secretariat;
 
 use sgbdtrue\views\AView;
 use sgbdtrue\views\IView;
-class HomeView extends AView implements IView
+class EditSecretariatView extends AView implements IView
 {
+
 
     protected  function getTemplateNameWithoutExt()
     {
-        return 'secretariat\default';
+        return 'secretariat\editSecretariat';
     }
 
     protected  function getTitle()
     {
-        return "Home page";
+        return "Edit secretariat";
     }
 
 }

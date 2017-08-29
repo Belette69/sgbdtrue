@@ -4,20 +4,21 @@
 namespace sgbdtrue\controllers\secretariat;
 
 
-use sgbdtrue\DAO\secretariat\MysqlUserDao;
+use sgbdtrue\DAO\secretariat\MysqlSecretariatDao;
 use sgbdtrue\exceptions\secretariat\InvalidActionException;
 use sgbdtrue\exceptions\secretariat\InvalidDataException;
-use sgbdtrue\utils\secretariat\ErrorMessageManager;
-use sgbdtrue\utils\secretariat\MysqlConnection;
-use sgbdtrue\views\secretariat\EditUserView;
+use sgbdtrue\utils\ErrorMessageManager;
+use sgbdtrue\utils\MysqlConnection;
+use sgbdtrue\views\secretariat\EditSecretariatView;
 use sgbdtrue\views\secretariat\HomeView;
 use sgbdtrue\controllers\IController;
 
-class EditUserController extends AAlterUserController implements IController
+class EditSecretariatController extends AAlterSecretariatController implements IController
 {
 
     public function doAction()
     {
+
         $data = array();
         $isTransactioStarted = false;
         $pdo = null;
@@ -26,42 +27,42 @@ class EditUserController extends AAlterUserController implements IController
         try
         {
             if(!isset($_GET["id"]))
-                throw new \InvalidActionException("Missing id");
+                throw new InvalidActionException("Missing id");
 
             $id = (int) $_GET["id"];
 
 
             $pdo = MysqlConnection::getConnection();
-            $userDao = new MysqlUserDao($pdo);
+            $secretariatDao = new MysqlSecretariatDao($pdo);
 
 
-            $user = $userDao->findById($id);
+            $secretariat = $secretariatDao->findById($id);
 
-            if($user === null)
-                throw new InvalidActionException("Unable to retrieve the user with id ".$id);
+            if($secretariat === null)
+                throw new InvalidActionException("Unable to retrieve the secretariat with id ".$id);
 
-            $data['user'] = $user;
+            $data['secretariat'] = $secretariat;
 
             if(!isset($_POST['id']))
             {
-                $view = new EditUserView();
+                $view = new EditSecretariatView();
                 $view->showView($data);
                 return;
             }
 
 
             //On a soumis le formulaire
-            $invalidFields = $this->validPostedDataAndSet($user);
+            $invalidFields = $this->validPostedDataAndSet($secretariat);
 
 
             if(count($invalidFields) > 0)
                 throw new InvalidDataException("Invalid submitted datas", $invalidFields);
 
             $isTransactioStarted = $pdo->beginTransaction();
-            $userDao->insertOrUpdate($user);
+            $secretariatDao->insertOrUpdate($secretariat);
             $pdo->commit();
 
-            header("Location: ".$_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"]);
+            header("Location: index.php?action=home&entities=secretariat");
 
 
         }
@@ -71,7 +72,7 @@ class EditUserController extends AAlterUserController implements IController
             if($ex instanceof InvalidActionException)
             {
                 ErrorMessageManager::getInstance()->addMessage($ex->getMessage());
-                header("Location: ".$_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"]);
+                header("Location: index.php?action=home&entities=secretariat");
                 return;
             }
 
@@ -91,7 +92,7 @@ class EditUserController extends AAlterUserController implements IController
 
 
 
-            $view = new EditUserView();
+            $view = new EditSecretariatView();
             $view->showView($data);
 
 
