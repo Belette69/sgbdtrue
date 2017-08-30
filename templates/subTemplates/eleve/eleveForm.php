@@ -2,10 +2,16 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col">
-            <a href="index.php" class="btn btn-dark">Home</a>
+            <a href="index.php" class="btn btn-dark"><span class="glyphicon glyphicon-home"></span> Home</a>
         </div>
         <div class="col">
+<<<<<<< HEAD
             <a href="index.php?action=home&amp;entities=eleve" class="btn btn-dark">Back</a>
+||||||| merged common ancestors
+            <a href="index.php?action=home&entities=eleve" class="btn btn-dark">Back</a>
+=======
+            <a href="index.php?action=home&entities=eleve" class="btn btn-dark"><span class="glyphicon glyphicon-backward"></span> Back</a>
+>>>>>>> 4009cec2478a9df83fe74bf4b32302fbc224e8e3
         </div>
     </div>
 </div>

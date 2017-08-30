@@ -4,7 +4,7 @@
 <div class="container-fluid">
 <div class="row">
     <div class="col">
-      <a href="index.php" class="btn btn-dark">Home</a>
+      <a href="index.php" class="btn btn-dark"><span class="glyphicon glyphicon-home"></span> Home</a>
     </div>
     <div class="col">
     <a href="index.php?action=create&amp;entities=prof" class="btn btn-dark">Ajouter un nouveau professeur</a>

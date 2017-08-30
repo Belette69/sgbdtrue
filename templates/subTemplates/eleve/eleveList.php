@@ -22,8 +22,10 @@
             <td><?php echo htmlentities($eleve->getPrenom());?></td>
             <td><?php echo htmlentities($eleve->getEmail());?></td>
             
-            <td><a href="index.php?action=edit&amp;entities=eleve&amp;id=<?php  echo htmlentities($eleve->getId(), ENT_QUOTES) ?>"><h6>Editer</h6></a></td>
-            <td><a href="index.php?action=delete&amp;entities=eleve&amp;id=<?php echo htmlentities($eleve->getId(), ENT_QUOTES) ?>"><h6>Supprimer</h6></a></td>
+            <td><a href="index.php?action=edit&amp;entities=eleve&amp;id=<?php  echo htmlentities($eleve->getId(), ENT_QUOTES) ?>"><!--<h6>Editer</h6>--><button type="button" class="btn btn-dark">
+          <span class="glyphicon glyphicon-pencil"></span> Editer </button></a></td>
+            <td><a href="index.php?action=delete&amp;entities=eleve&amp;id=<?php echo htmlentities($eleve->getId(), ENT_QUOTES) ?>"><!--<h6>Supprimer</h6>--><button type="button" class="btn btn-dark">
+          <span class="glyphicon glyphicon-remove"></span> Supprimer </button></a></td>
 
         </tr>
         <?php
