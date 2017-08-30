@@ -10,7 +10,7 @@ class CreateEleveView extends AView implements IView
 
     protected  function getTemplateNameWithoutExt()
     {
-        return 'eleve\editEleve';
+        return 'eleve\createEleve';
     }
 
     protected  function getTitle()
