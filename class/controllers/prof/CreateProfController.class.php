@@ -37,7 +37,7 @@ class CreateProfController extends AAlterProfController implements IController
             $invalidFields = $this->validPostedDataAndSet($prof);
 
             if(count($invalidFields) > 0)
-                throw new InvalidDataException("Invalid submitted datas", $invalidFields);
+                throw new InvalidDataException("Données soumises invalides", $invalidFields);
 
             $pdo = MysqlConnection::getConnection();
             $profDao = new MysqlProfDao($pdo);
@@ -45,29 +45,32 @@ class CreateProfController extends AAlterProfController implements IController
 
             $profDao->insertOrUpdate($prof);
             $pdo->commit();
-           header("Location: index.php?action=home&entities=prof"); 
+            ErrorMessageManager::getInstance()->addSuccessMessage("Professeur ajouté avec succès !");
+            header("Location: index.php?action=home&entities=prof"); 
             
 
 
         }
        catch (\Exception $ex)
        {
-           if($ex instanceof  \PDOException && $ex->getCode() == 23000)
-           {
-               $data['error'] = "The email already exists";
-               $data['invalidFields'] = array("email");
-           }
-           else
-               $data['error'] = $ex->getMessage();
-
-           if($ex instanceof InvalidDataException)
-               $data['invalidFields'] = $ex->getInvalidData();
-
-           if($isTransactioStarted)
-               $pdo->rollBack();
-
-           $view = new CreateProfView();
-           $view->showView($data);
+            if($isTransactioStarted)
+                $pdo->rollBack();
+            
+            if($ex instanceof InvalidDataException){
+                $data['invalidFields'] = $ex->getInvalidData();
+                ErrorMessageManager::getInstance()->addErrorMessage($ex->getMessage());
+            }else if($ex instanceof  \PDOException && $ex->getCode() == 23000)
+            {
+                $data['error'] = "L'email existe déjà.";
+                $data['invalidFields'] = array("email");
+            }
+            else{
+                ErrorMessageManager::getInstance()->addErrorMessage("Service indisponible");
+                header("Location: index.php");
+            }
+                
+            $view = new EditProfView();
+            $view->showView($data);
 
        }
 

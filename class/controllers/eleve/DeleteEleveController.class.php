@@ -5,8 +5,8 @@ namespace sgbdtrue\controllers\eleve;
 
 
 use sgbdtrue\DAO\eleve\MysqlEleveDao;
-use sgbdtrue\exceptions\eleve\InvalidActionException;
-use sgbdtrue\exceptions\eleve\InvalidDataException;
+use sgbdtrue\exceptions\InvalidActionException;
+use sgbdtrue\exceptions\InvalidDataException;
 use sgbdtrue\utils\ErrorMessageManager;
 use sgbdtrue\utils\MysqlConnection;
 use sgbdtrue\views\eleve\ConfirmEleveDeletionView;
@@ -40,7 +40,7 @@ class DeleteEleveController implements IController
             
 
             if($eleve === null)
-                throw new InvalidActionException("Unable to retrieve the eleve with id ".$id);
+                throw new InvalidActionException("Impossible de trouver un élève avec l'id: ".$id);
 
 
             if(!isset($_POST['confirmed']))
@@ -52,7 +52,7 @@ class DeleteEleveController implements IController
             
             $eleveDao->delete($eleve);
             
-            ErrorMessageManager::getInstance()->addMessage("Eleve removed with seccess!");
+            ErrorMessageManager::getInstance()->addSuccessMessage("Élève supprimé avec succès !");
             header("Location: index.php?action=home&entities=eleve");
 
 
@@ -62,24 +62,12 @@ class DeleteEleveController implements IController
         catch (\Exception $ex)
         {
 
-
-            if($ex instanceof  \PDOException && $ex->getCode() == 23000)
-            {
-                $data['error'] = "The email already exists";
-                $data['invalidFields'] = array("email");
-            }
-            else
-                $data['error'] = $ex->getMessage();
-
-
             if($isTransactioStarted)
                 $pdo->rollBack();
 
-            ErrorMessageManager::getInstance()->addMessage($ex->getMessage());
-            header("Location: ".$_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"]);
+            ErrorMessageManager::getInstance()->addErrorMessage($ex->getMessage());
+            header("Location: index.php?action=home&entities=eleve");
             return;
-
-
 
         }
 

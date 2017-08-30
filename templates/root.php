@@ -14,16 +14,20 @@
     <?php
     if(isset($error))
     {
-        echo '<div class="erreur">'.htmlentities($error).'</div>';
+        echo '<div class="alert alert-danger" role="alert">'.htmlentities($error).'</div>';
     }
      
     
-    $errorMessageList = \sgbdtrue\utils\ErrorMessageManager::getInstance()->getMessageList();
-
+    $errorMessageList = \sgbdtrue\utils\ErrorMessageManager::getInstance()->getErrorMessageList();
+    $successMessageList = \sgbdtrue\utils\ErrorMessageManager::getInstance()->getSuccessMessageList();
 
     foreach ($errorMessageList as $error)
     {
-        echo '<div class="erreur">'.htmlentities($error).'</div>';
+        echo '<div class="alert alert-danger" role="alert">'.htmlentities($error).'</div>';
+    }
+
+    foreach($successMessageList as $success){
+        echo '<div class="alert alert-success" role="alert">'.htmlentities($success).'</div>';
     }
 
     ?>

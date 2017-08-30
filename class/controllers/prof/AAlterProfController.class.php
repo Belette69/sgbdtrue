@@ -28,10 +28,11 @@ abstract class AAlterProfController implements IController
             $invalidFields[] = 'nom';
         }
 
-        $prof->setEmail(isset($_POST['email']) ? trim($_POST['email']) : "");
-        if($prof->getEmail() == "" && filter_var($prof->getEmail(), FILTER_VALIDATE_EMAIL))
-        {
-            $invalidFields[] = 'email';
+        if(isset($_POST['email']) && filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
+            $email=substr(htmlspecialchars(trim($_POST['email'])),0,100);
+            $prof->setEmail($email);
+        }else{
+            $invalidFields[]="email";
         }
 
     }     

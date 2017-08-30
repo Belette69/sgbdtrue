@@ -27,7 +27,7 @@ class DeleteProfController implements IController
         try
         {
             if(!isset($_GET["id"]))
-                throw new \InvalidActionException("Missing id");
+                throw new \InvalidActionException("ID manquant");
 
             $id = (int) $_GET["id"];
 
@@ -39,7 +39,7 @@ class DeleteProfController implements IController
             $prof = $profDao->findById($id);
 
             if($prof === null)
-                throw new InvalidActionException("Unable to retrieve the prof with id ".$id);
+                throw new InvalidActionException("Impossible de retrouver le professeur avec cet ID");
 
 
             if(!isset($_POST['confirmed']))
@@ -50,7 +50,7 @@ class DeleteProfController implements IController
             }
 
             $profDao->delete($prof);
-            ErrorMessageManager::getInstance()->addMessage("Enseignant supprimé avec succes!");
+            ErrorMessageManager::getInstance()->addSuccessMessage("Enseignant supprimé avec succes!");
             header("Location: index.php?action=home&entities=prof");
 
 
@@ -60,21 +60,13 @@ class DeleteProfController implements IController
         {
 
 
-            if($ex instanceof  \PDOException && $ex->getCode() == 23000)
-            {
-                $data['error'] = "The email already exists";
-                $data['invalidFields'] = array("email");
-            }
-            else
-                $data['error'] = $ex->getMessage();
-
-
             if($isTransactioStarted)
                 $pdo->rollBack();
 
-            ErrorMessageManager::getInstance()->addMessage($ex->getMessage());
-            header("Location: ".$_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"]);
+            ErrorMessageManager::getInstance()->addErrorMessage($ex->getMessage());
+            header("Location: index.php?action=home&entities=prof");
             return;
+
 
 
 

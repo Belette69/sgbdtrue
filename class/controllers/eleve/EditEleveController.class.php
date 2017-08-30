@@ -5,8 +5,8 @@ namespace sgbdtrue\controllers\eleve;
 
 
 use sgbdtrue\DAO\eleve\MysqlEleveDao;
-use sgbdtrue\exceptions\eleve\InvalidActionException;
-use sgbdtrue\exceptions\eleve\InvalidDataException;
+use sgbdtrue\exceptions\InvalidActionException;
+use sgbdtrue\exceptions\InvalidDataException;
 use sgbdtrue\utils\ErrorMessageManager;
 use sgbdtrue\utils\MysqlConnection;
 use sgbdtrue\views\eleve\EditEleveView;
@@ -27,7 +27,7 @@ class EditEleveController extends AAlterEleveController implements IController
         try
         {
             if(!isset($_GET["id"]))
-                throw new InvalidActionException("Missing id");
+                throw new InvalidActionException("Id manquant");
 
             $id = (int) $_GET["id"];
 
@@ -40,7 +40,7 @@ class EditEleveController extends AAlterEleveController implements IController
             
 
             if($eleve === null)
-                throw new InvalidActionException("Unable to retrieve the eleve with id ".$id);
+                throw new InvalidActionException("Impossible de retrouver l'élève avec cet ID");
 
             $notTakenCoursList=$eleveDao->getNotTakenCoursForThisEleve($eleve);
             $data['notTakenCoursList']=$notTakenCoursList;
@@ -60,11 +60,12 @@ class EditEleveController extends AAlterEleveController implements IController
 
 
             if(count($invalidFields) > 0)
-                throw new InvalidDataException("Invalid submitted datas", $invalidFields);
+                throw new InvalidDataException("Données soumises invalides", $invalidFields);
 
             $isTransactioStarted = $pdo->beginTransaction();
             $eleveDao->insertOrUpdate($eleve);
             $pdo->commit();
+            ErrorMessageManager::getInstance()->addSuccessMessage("Élève correctement modifié");
 
             header("Location: index.php?action=home&entities=eleve");
 
@@ -73,29 +74,26 @@ class EditEleveController extends AAlterEleveController implements IController
 
         catch (\Exception $ex)
         {
-            if($ex instanceof InvalidActionException)
-            {
-                ErrorMessageManager::getInstance()->addMessage($ex->getMessage());
-                header("Location: index.php?action=home&entities=eleve");
-                return;
-            }
-
-            if($ex instanceof  \PDOException && $ex->getCode() == 23000)
-            {
-                $data['error'] = "The email already exists";
-                $data['invalidFields'] = array("email");
-            }
-            else
-                $data['error'] = $ex->getMessage();
-
-            if($ex instanceof InvalidDataException)
-                $data['invalidFields'] = $ex->getInvalidData();
-
             if($isTransactioStarted)
                 $pdo->rollBack();
-
-
-
+            
+            if($ex instanceof InvalidActionException)
+            {
+                ErrorMessageManager::getInstance()->addErrorMessage($ex->getMessage());
+                header("Location: index.php?action=home&entities=eleve");
+                return;
+            }else if($ex instanceof InvalidDataException){
+                $data['invalidFields'] = $ex->getInvalidData();
+            }else if($ex instanceof  \PDOException && $ex->getCode() == 23000)
+            {
+                $data['error'] = "L'email existe déjà.";
+                $data['invalidFields'] = array("email");
+            }
+            else{
+                ErrorMessageManager::getInstance()->addErrorMessage("Service indisponible");
+                header("Location: index.php");
+            }
+                
             $view = new EditEleveView();
             $view->showView($data);
 

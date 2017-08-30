@@ -28,10 +28,11 @@ abstract class AAlterEleveController implements IController
             $invalidFields[] = 'prenom';
         }
 
-        $eleve->setEmail(isset($_POST['email']) ? trim($_POST['email']) : "");
-        if($eleve->getEmail() == "" && filter_var($eleve->getEmail(), FILTER_VALIDATE_EMAIL))
-        {
-            $invalidFields[] = 'email';
+        if(isset($_POST['email']) && filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
+            $email=substr(htmlspecialchars(trim($_POST['email'])),0,100);
+            $eleve->setEmail($email);
+        }else{
+            $invalidFields[]="email";
         }
 
         

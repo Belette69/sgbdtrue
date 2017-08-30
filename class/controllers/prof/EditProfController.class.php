@@ -5,8 +5,8 @@ namespace sgbdtrue\controllers\prof;
 
 
 use sgbdtrue\DAO\prof\MysqlProfDao;
-use sgbdtrue\exceptions\prof\InvalidActionException;
-use sgbdtrue\exceptions\prof\InvalidDataException;
+use sgbdtrue\exceptions\InvalidActionException;
+use sgbdtrue\exceptions\InvalidDataException;
 use sgbdtrue\utils\ErrorMessageManager;
 use sgbdtrue\utils\MysqlConnection;
 use sgbdtrue\views\prof\EditProfView;
@@ -26,7 +26,7 @@ class EditProfController extends AAlterProfController implements IController
         try
         {
             if(!isset($_GET["id"]))
-                throw new \InvalidActionException("Missing id");
+                throw new \InvalidActionException("ID manquant");
 
             $id = (int) $_GET["id"];
 
@@ -38,7 +38,7 @@ class EditProfController extends AAlterProfController implements IController
             $prof = $profDao->findById($id);
 
             if($prof === null)
-                throw new InvalidActionException("Unable to retrieve the prof with id ".$id);
+                throw new InvalidActionException("Impossible de trouver un professeur avec cet ID");
 
             $data['prof'] = $prof;
 
@@ -55,12 +55,12 @@ class EditProfController extends AAlterProfController implements IController
 
 
             if(count($invalidFields) > 0)
-                throw new InvalidDataException("Invalid submitted datas", $invalidFields);
+                throw new InvalidDataException("Données soumises invalides", $invalidFields);
 
             $isTransactioStarted = $pdo->beginTransaction();
             $profDao->insertOrUpdate($prof);
             $pdo->commit();
-
+            ErrorMessageManager::getInstance()->addSuccessMessage("Professeur correctement modifié");
             header("Location: index.php?action=home&entities=prof");
 
 
@@ -68,29 +68,27 @@ class EditProfController extends AAlterProfController implements IController
 
         catch (\Exception $ex)
         {
-            if($ex instanceof InvalidActionException)
-            {
-                ErrorMessageManager::getInstance()->addMessage($ex->getMessage());
-                header("Location: ".$_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"]);
-                return;
-            }
-
-            if($ex instanceof  \PDOException && $ex->getCode() == 23000)
-            {
-                $data['error'] = "The email already exists";
-                $data['invalidFields'] = array("email");
-            }
-            else
-                $data['error'] = $ex->getMessage();
-
-            if($ex instanceof InvalidDataException)
-                $data['invalidFields'] = $ex->getInvalidData();
-
             if($isTransactioStarted)
                 $pdo->rollBack();
-
-
-
+            
+            if($ex instanceof InvalidActionException)
+            {
+                ErrorMessageManager::getInstance()->addErrorMessage($ex->getMessage());
+                header("Location: index.php?action=home&entities=prof");
+                return;
+            }else if($ex instanceof InvalidDataException){
+                $data['invalidFields'] = $ex->getInvalidData();
+                ErrorMessageManager::getInstance()->addErrorMessage($ex->getMessage());
+            }else if($ex instanceof  \PDOException && $ex->getCode() == 23000)
+            {
+                $data['error'] = "L'email existe déjà.";
+                $data['invalidFields'] = array("email");
+            }
+            else{
+                ErrorMessageManager::getInstance()->addErrorMessage("Service indisponible");
+                header("Location: index.php");
+            }
+                
             $view = new EditProfView();
             $view->showView($data);
 
