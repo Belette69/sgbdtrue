@@ -7,7 +7,7 @@
       <a href="index.php" class="btn btn-dark"><span class="glyphicon glyphicon-home"></span> Home</a>
     </div>
     <div class="col">
-    <a href="index.php?action=create&amp;entities=eleve" class="btn btn-dark">Ajouter un nouvel élève</a>
+    <a href="index.php?action=create&amp;entities=eleve" class="btn btn-dark"><span class="glyphicon glyphicon-plus"></span> Ajouter un nouvel élève</a>
     </div>
   </div>
 </div>

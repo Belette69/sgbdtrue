@@ -2,12 +2,12 @@
 <table class="table table-striped">
     <thead class="thead-inverse">
     <tr>
-        <th>Id</th>
-        <th>Intitule</th>
-        <th>Nombre de périodes</th>
-        <th>Professeur</th>
+        <th><span class="glyphicon glyphicon-eye-open"></span> Id</th>
+        <th><span class="glyphicon glyphicon-duplicate"></span> Intitule</th>
+        <th><span class="glyphicon glyphicon-hourglass"></span> Nombre de périodes</th>
+        <th><span class="glyphicon glyphicon-education"></span> Professeur</th>
         
-        <th colspan="2">Actions</th>
+        <th colspan="2"><span class="glyphicon glyphicon-wrench"></span> Actions</th>
     </tr>
     </thead>
     <tbody>

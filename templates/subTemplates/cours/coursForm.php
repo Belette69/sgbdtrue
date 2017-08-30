@@ -4,7 +4,7 @@
       <a href="index.php" class="btn btn-dark"><span class="glyphicon glyphicon-home"></span> Home</a>
     </div>
     <div class="col">
-    <a href="index.php?action=home&entities=cours" class="btn btn-dark"<span class="glyphicon glyphicon-backward"></span> >Back</a>
+    <a href="index.php?action=home&entities=cours" class="btn btn-dark"><span class="glyphicon glyphicon-backward"></span> Back</a>
     </div>
   </div>
 </div>
