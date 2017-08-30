@@ -9,8 +9,9 @@ use sgbdtrue\entities\prof\Gender;
 use sgbdtrue\entities\prof\Prof;
 use sgbdtrue\exceptions\InvalidDataException;
 use sgbdtrue\utils\MysqlConnection;
+use sgbdtrue\utils\ErrorMessageManager;
 use sgbdtrue\views\prof\CreateProfView;
-use sgbdtrue\views\prof\HomeView;
+use sgbdtrue\views\prof\EditProfView;
 use sgbdtrue\controllers\IController;
 
 class CreateProfController extends AAlterProfController implements IController
