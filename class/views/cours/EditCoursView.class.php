@@ -15,7 +15,7 @@ class EditCoursView extends AView implements IView
 
     protected  function getTitle()
     {
-        return "Edit cours";
+        return "Editer un cours";
     }
 
 }
