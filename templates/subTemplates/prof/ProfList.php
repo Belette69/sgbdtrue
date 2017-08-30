@@ -2,11 +2,11 @@
 <table class="table table-striped">
     <thead class="thead-inverse">
     <tr>
-        <th>Id</th>
-        <th>Prénom</th>
-        <th>Nom</th>
-        <th>Email</th>
-        <th colspan="2">Actions</th>
+        <th><span class="glyphicon glyphicon-eye-open"></span> Id</th>
+        <th><span class="glyphicon glyphicon-star"></span> Prénom</th>
+        <th><span class="glyphicon glyphicon-star-empty"></span> Nom</th>
+        <th><span class="glyphicon glyphicon-envelope"></span> Email</th>
+        <th colspan="2"><span class="glyphicon glyphicon-wrench"></span> Actions</th>
     </tr>
     </thead>
     <tbody>
