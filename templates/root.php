@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title><?php echo $title ?></title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">-->
     <link rel="stylesheet" TYPE="text/css" href="design.css">
+    <link rel="stylesheet" href="bootstrap-4.0.0-beta\dist\css\bootstrap.min.css">
+    <link rel="stylesheet" href="open-iconic-master\svg"
 
 </head>
 <div class="container">
