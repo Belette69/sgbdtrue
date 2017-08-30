@@ -5,7 +5,11 @@
             <a href="index.php" class="btn btn-dark"><span class="glyphicon glyphicon-home"></span> Home</a>
         </div>
         <div class="col">
+<<<<<<< HEAD
             <a href="index.php?action=home&entities=eleve" class="btn btn-dark"><span class="glyphicon glyphicon-backward"></span> Back</a>
+=======
+            <a href="index.php?action=home&amp;entities=eleve" class="btn btn-dark"><span class="glyphicon glyphicon-backward"></span> Back</a>
+>>>>>>> b6c992351c5d86d1c7d3d5ae5511e355350793c5
         </div>
     </div>
 </div>
