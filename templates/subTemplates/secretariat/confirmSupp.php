@@ -8,5 +8,5 @@
 <form action="" method="post" class="user-form">
     <p>Voulez vous vraiment supprimer ce secrétaire ? <?php echo htmlentities($secretariat->getNom().' '.$secretariat->getPrenom());?></p>
     <p><input type="hidden" name="confirmed" value="YES"/></p>
-    <p class="submit-container"><input type="submit" value="OK"/></p>
+    <p class="submit-container"><input type="submit" class="btn btn-dark" value="OK"/></p>
 </form>

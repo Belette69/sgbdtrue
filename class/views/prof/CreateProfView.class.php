@@ -15,7 +15,7 @@ class CreateProfView extends AView implements IView
 
     protected  function getTitle()
     {
-        return "Create prof";
+        return "Création professeur";
     }
 
 }

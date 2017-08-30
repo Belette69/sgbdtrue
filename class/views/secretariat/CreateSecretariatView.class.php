@@ -15,7 +15,7 @@ class CreateSecretariatView extends AView implements IView
 
     protected  function getTitle()
     {
-        return "Create secretariat";
+        return "Création secrétaire";
     }
 
 }

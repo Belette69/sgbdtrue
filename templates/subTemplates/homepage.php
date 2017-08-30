@@ -1,8 +1,4 @@
-<style>
-h5:hover{
-    color:red;
-}
-</style>
+
 <h1>GESTION D'ETABLISSEMENT SCOLAIRE</h1>
 <?php
 
@@ -27,7 +23,7 @@ h5:hover{
 
 <!--<div class="list-group"><a href="index.php?action=create&amp;entities=inscription" class="list-group-item list-group-item-action">Ajouter une inscription</a></div>-->
 
-<div class="list-group"><a href="index.php?action=home&amp;entities=inscription" class="list-group-item list-group-item-action"><h5>Liste des inscriptions</h5></a></div>
+<!-- <div class="list-group"><a href="index.php?action=home&amp;entities=inscription" class="list-group-item list-group-item-action"><h5>Liste des inscriptions</h5></a></div>-->
 
 <?php
 

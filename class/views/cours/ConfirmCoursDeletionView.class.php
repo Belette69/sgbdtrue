@@ -15,7 +15,7 @@ class ConfirmCoursDeletionView extends AView implements IView
 
     protected  function getTitle()
     {
-        return "Confirm deletion";
+        return "Confirmation de suppression du cours";
     }
 
 }

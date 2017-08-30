@@ -1,19 +1,4 @@
-<style>
-a:hover {
-color: red;
-}
-a{
-    color:black;
-    text-decoration:underline;
-    font-style: italic;
-}
-th{
-    text-align: center;
-}
-td{
-    text-align: center;
-}
-</style>
+
 <table class="table table-striped">
     <thead class="thead-inverse">
     <tr>
@@ -47,8 +32,8 @@ td{
             <td><?php echo htmlentities($secretariat->getPseudo());?></td>
             <td><?php echo htmlentities($secretariat->getPassword());?></td>
             
-            <td><a href="index.php?action=edit&amp;entities=secretariat&amp;id=<?php  echo htmlentities($secretariat->getId(), ENT_QUOTES) ?>" >Editer</a></td>
-            <td><a href="index.php?action=delete&amp;entities=secretariat&amp;id=<?php echo htmlentities($secretariat->getId(), ENT_QUOTES) ?>">Supprimer</a></td>
+            <td><a href="index.php?action=edit&amp;entities=secretariat&amp;id=<?php  echo htmlentities($secretariat->getId(), ENT_QUOTES) ?>" ><h6>Editer</h6></a></td>
+            <td><a href="index.php?action=delete&amp;entities=secretariat&amp;id=<?php echo htmlentities($secretariat->getId(), ENT_QUOTES) ?>"><h6>Supprimer</h6></a></td>
 
         </tr>
         <?php

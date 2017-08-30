@@ -50,7 +50,7 @@ class DeleteProfController implements IController
             }
 
             $profDao->delete($prof);
-            ErrorMessageManager::getInstance()->addMessage("Enseignent supprimé avec succes!");
+            ErrorMessageManager::getInstance()->addMessage("Enseignant supprimé avec succes!");
             header("Location: index.php?action=home&entities=prof");
 
 

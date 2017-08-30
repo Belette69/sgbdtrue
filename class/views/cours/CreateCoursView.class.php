@@ -15,7 +15,7 @@ class CreateCoursView extends AView implements IView
 
     protected  function getTitle()
     {
-        return "Create cours";
+        return "Création cours";
     }
 
 }

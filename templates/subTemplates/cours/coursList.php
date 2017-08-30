@@ -1,19 +1,4 @@
-<style>
-a:hover {
-color: red;
-}
-a{
-    color:black;
-    text-decoration:underline;
-    font-style: italic;
-}
-th{
-    text-align: center;
-}
-td{
-    text-align: center;
-}
-</style>
+
 <table class="table table-striped">
     <thead class="thead-inverse">
     <tr>
@@ -36,8 +21,8 @@ td{
             <td><?php echo htmlentities($cours->getPeriode());?></td>
             <td><?php echo htmlentities($cours->getProf()->getNom().' '.$cours->getProf()->getPrenom());?></td>
             
-            <td><a href="index.php?action=edit&amp;entities=cours&amp;id=<?php  echo htmlentities($cours->getId(), ENT_QUOTES) ?>">Editer</a></td>
-            <td><a href="index.php?action=delete&amp;entities=cours&amp;id=<?php echo htmlentities($cours->getId(), ENT_QUOTES) ?>">Supprimer</a></td>
+            <td><a href="index.php?action=edit&amp;entities=cours&amp;id=<?php  echo htmlentities($cours->getId(), ENT_QUOTES) ?>"><h6>Editer</h6></a></td>
+            <td><a href="index.php?action=delete&amp;entities=cours&amp;id=<?php echo htmlentities($cours->getId(), ENT_QUOTES) ?>"><h6>Supprimer</h6></a></td>
             
             
 

@@ -15,7 +15,7 @@ class CreateEleveView extends AView implements IView
 
     protected  function getTitle()
     {
-        return "Create eleve";
+        return "Création élève";
     }
 
 }
