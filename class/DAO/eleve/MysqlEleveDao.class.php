@@ -5,6 +5,7 @@ namespace sgbdtrue\DAO\eleve;
 
 
 use sgbdtrue\entities\eleve\Eleve;
+use sgbdtrue\entities\cours\Cours;
 
 class MysqlEleveDao implements IEleveDao
 {
@@ -117,7 +118,7 @@ class MysqlEleveDao implements IEleveDao
         if($row === false)
             return null;
 
-        return $this->makeEleveFromRow($row);;
+        return $this->makeEleveFromRow($row);
 
 
     }
@@ -156,6 +157,42 @@ class MysqlEleveDao implements IEleveDao
         return $this->makeEleveFromRow($row);;
     }
 
+    public function getCoursForThisEleve(Eleve $eleve){
+        $sql = "SELECT cours.id, cours.intitule FROM sgbdtrue.cours INNER JOIN sgbdtrue.inscriptions ON cours.id = inscriptions.id_cours  WHERE inscriptions.id_eleve = :id_eleve ";
+        $preparedStatement = $this->pdo->prepare($sql);
+        $preparedStatement->bindValue(':id_eleve', $eleve->getId(), \PDO::PARAM_INT);
+        $preparedStatement->execute();
+
+        $coursList=[];
+        while(false !== ($row = $preparedStatement->fetch(\PDO::FETCH_ASSOC))){
+            $cours=new Cours();
+            $cours->setId($row['id']);
+            $cours->setIntitule($row['intitule']);
+            $coursList[]=$cours;
+        }
+
+        return $coursList;
+    }
+
+    public function getNotTakenCoursForThisEleve(Eleve $eleve){
+        $sql="SELECT cours.id, cours.intitule FROM sgbdtrue.cours
+              WHERE cours.id NOT IN(
+		        SELECT cours.id FROM sgbdtrue.cours
+		        INNER JOIN sgbdtrue.inscriptions ON cours.id=inscriptions.id_cours
+		        WHERE inscriptions.id_eleve=:id)";
+        $preparedStatement=$this->pdo->prepare($sql);
+        $preparedStatement->bindValue(':id',$eleve->getId(),\PDO::PARAM_INT);
+        $preparedStatement->execute();
+        $coursList=array();
+        while(false!==($row=$preparedStatement->fetch(\PDO::FETCH_ASSOC))){
+            $cours = new Cours();
+            $cours->setId($row['id']);
+            $cours->setIntitule($row['intitule']);
+            $coursList[]=$cours;
+        }
+        return $coursList;
+    }
+
     private function makeEleveFromRow(array $row)
     {
         $eleve = new Eleve();
@@ -163,6 +200,11 @@ class MysqlEleveDao implements IEleveDao
         $eleve->setEmail($row['email']);
         $eleve->setNom($row['nom']);
         $eleve->setPrenom($row['prenom']);
+        $coursList=$this->getCoursForThisEleve($eleve);
+        
+        foreach($coursList as $cours){
+            $eleve->addCours($cours);
+        }
         
         return $eleve;
     }

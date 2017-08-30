@@ -37,9 +37,13 @@ class EditEleveController extends AAlterEleveController implements IController
 
 
             $eleve = $eleveDao->findById($id);
+            
 
             if($eleve === null)
                 throw new InvalidActionException("Unable to retrieve the eleve with id ".$id);
+
+            $notTakenCoursList=$eleveDao->getNotTakenCoursForThisEleve($eleve);
+            $data['notTakenCoursList']=$notTakenCoursList;
 
             $data['eleve'] = $eleve;
 

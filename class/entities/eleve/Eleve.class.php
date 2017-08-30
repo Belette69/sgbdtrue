@@ -2,6 +2,7 @@
 
 namespace sgbdtrue\entities\eleve;
 
+use sgbdtrue\entities\cours\Cours;
 
 class Eleve
 {
@@ -22,6 +23,10 @@ class Eleve
      */
     private $email;
 
+    /**
+     * @var listeCours[]
+     */
+    private $listeCours=array();
     /**
      * @return int
      */
@@ -91,6 +96,14 @@ class Eleve
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    public function addCours(Cours $cours){
+        $this->listeCours[]=$cours;
+    }
+
+    public function getListeCours(){
+        return $this->listeCours;
     }
 
 

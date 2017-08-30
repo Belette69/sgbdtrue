@@ -23,7 +23,7 @@ if(isset($_GET['entities']))
     {
         $entities='cours';
     }
-    else if($_GET['entities']=='inscritpion')
+    else if($_GET['entities']=='inscription')
     {
         $entities='inscription';
     }
