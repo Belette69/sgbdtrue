@@ -21,8 +21,10 @@
             <td><?php echo htmlentities($cours->getPeriode());?></td>
             <td><?php echo htmlentities($cours->getProf()->getNom().' '.$cours->getProf()->getPrenom());?></td>
             
-            <td><a href="index.php?action=edit&amp;entities=cours&amp;id=<?php  echo htmlentities($cours->getId(), ENT_QUOTES) ?>"><h6>Editer</h6></a></td>
-            <td><a href="index.php?action=delete&amp;entities=cours&amp;id=<?php echo htmlentities($cours->getId(), ENT_QUOTES) ?>"><h6>Supprimer</h6></a></td>
+            <td><a href="index.php?action=edit&amp;entities=cours&amp;id=<?php  echo htmlentities($cours->getId(), ENT_QUOTES) ?>"><button type="button" class="btn btn-dark">
+          <span class="glyphicon glyphicon-pencil"></span> Editer </button></a></td>
+            <td><a href="index.php?action=delete&amp;entities=cours&amp;id=<?php echo htmlentities($cours->getId(), ENT_QUOTES) ?>"><button type="button" class="btn btn-dark">
+          <span class="glyphicon glyphicon-remove"></span> Supprimer </button></a></td>
             
             
 

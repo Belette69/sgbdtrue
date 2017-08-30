@@ -17,4 +17,8 @@ h5:hover{
 h6{
     text-decoration:underline;
     font-style: italic;
+    color:black;
 }
+h5{
+    font-weight:bold
+})
