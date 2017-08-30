@@ -21,5 +21,5 @@ include __DIR__.DIRECTORY_SEPARATOR.'eleveForm.php';
         <?php endforeach; ?>
     </select>
     <input type="hidden" name="id_eleve" value="<?php echo $eleve->getId(); ?>"/>
-    <button type="submit">Ajouter</button>
+    <button type="submit" class="btn btn-dark">Ajouter</button>
 </form>
