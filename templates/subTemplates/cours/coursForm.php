@@ -30,6 +30,7 @@
     </div>
 
     </p>
+    </br>
     <p class="submit-container"><input type="submit" class="btn btn-dark" value="VALIDER"/></p>
     <input type="hidden" name="id" value="<?php echo htmlentities($cours->getId()); ?>"/>
 </form>

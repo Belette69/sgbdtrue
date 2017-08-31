@@ -15,7 +15,7 @@ class EditSecretariatView extends AView implements IView
 
     protected  function getTitle()
     {
-        return "Edit secretariat";
+        return "Editer le secretariat";
     }
 
 }

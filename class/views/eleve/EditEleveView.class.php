@@ -15,7 +15,7 @@ class EditEleveView extends AView implements IView
 
     protected  function getTitle()
     {
-        return "Edit eleve";
+        return "Editer un élève";
     }
 
 }

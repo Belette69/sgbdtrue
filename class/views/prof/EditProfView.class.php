@@ -15,7 +15,7 @@ class EditProfView extends AView implements IView
 
     protected  function getTitle()
     {
-        return "Edit prof";
+        return "Editer un professeur";
     }
 
 }
