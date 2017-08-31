@@ -5,8 +5,8 @@ namespace sgbdtrue\controllers\cours;
 
 
 use sgbdtrue\DAO\cours\MysqlCoursDao;
-use sgbdtrue\exceptions\cours\InvalidActionException;
-use sgbdtrue\exceptions\cours\InvalidDataException;
+use sgbdtrue\exceptions\InvalidActionException;
+use sgbdtrue\exceptions\InvalidDataException;
 use sgbdtrue\utils\ErrorMessageManager;
 use sgbdtrue\utils\MysqlConnection;
 use sgbdtrue\views\cours\ConfirmCoursDeletionView;
@@ -27,7 +27,7 @@ class DeleteCoursController implements IController
         try
         {
             if(!isset($_GET["id"]))
-                throw new \InvalidActionException("Missing id");
+                throw new InvalidActionException("ID manquant");
 
             $id = (int) $_GET["id"];
 
@@ -39,7 +39,7 @@ class DeleteCoursController implements IController
             $cours = $coursDao->findById($id);
 
             if($cours === null)
-                throw new InvalidActionException("Unable to retrieve the cours with id ".$id);
+                throw new InvalidActionException("Impossible de retrouver le cours avec cet ID");
 
 
             if(!isset($_POST['confirmed']))
@@ -50,7 +50,7 @@ class DeleteCoursController implements IController
             }
 
             $coursDao->delete($cours);
-            ErrorMessageManager::getInstance()->addMessage("cours supprimé avec succes!");
+            ErrorMessageManager::getInstance()->addSuccessMessage("Cours supprimé avec succes!");
             header("Location: index.php?action=home&entities=cours");
 
 
@@ -72,8 +72,8 @@ class DeleteCoursController implements IController
             if($isTransactioStarted)
                 $pdo->rollBack();
 
-            ErrorMessageManager::getInstance()->addMessage($ex->getMessage());
-            header("Location: ".$_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"]);
+            ErrorMessageManager::getInstance()->addErrorMessage($ex->getMessage());
+            header("Location: index.php");
             return;
 
 

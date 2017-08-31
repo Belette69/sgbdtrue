@@ -10,7 +10,6 @@ use sgbdtrue\exceptions\InvalidDataException;
 use sgbdtrue\utils\MysqlConnection;
 use sgbdtrue\utils\ErrorMessageManager;
 use sgbdtrue\views\eleve\CreateEleveView;
-use sgbdtrue\views\eleve\ShowEleveView;
 use sgbdtrue\controllers\IController;
 
 
@@ -76,7 +75,7 @@ class CreateEleveController extends AAlterEleveController implements IController
                 header("Location: index.php");
             }
                 
-            $view = new EditEleveView();
+            $view = new CreateEleveView();
             $view->showView($data);
 
        }

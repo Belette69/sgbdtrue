@@ -83,6 +83,7 @@ class EditEleveController extends AAlterEleveController implements IController
                 header("Location: index.php?action=home&entities=eleve");
                 return;
             }else if($ex instanceof InvalidDataException){
+                ErrorMessageManager::getInstance()->addErrorMessage($ex->getMessage());
                 $data['invalidFields'] = $ex->getInvalidData();
             }else if($ex instanceof  \PDOException && $ex->getCode() == 23000)
             {

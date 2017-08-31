@@ -8,7 +8,6 @@
         <th><span class="glyphicon glyphicon-envelope"></span>  Email</th>
         <th><span class="glyphicon glyphicon-earphone"></span> Numero</th>
         <th><span class="glyphicon glyphicon-user"></span> Pseudo</th>
-        <th><span class="glyphicon glyphicon-exclamation-sign"></span> Password</th>
         
         <th colspan="2"><span class="glyphicon glyphicon-wrench"></span> Actions</th>
     </tr>
@@ -16,12 +15,7 @@
     <tbody>
     <?php
     for($i=0, $count=count($secretariatList); $i<$count; ++$i):
-        /**
-         * @var \sgbdtrue\entities\Secretariat $secretariat
-         */
         $secretariat = $secretariatList[$i];
-        //if(!($secretariat instanceof \sgbdtrue\entities\Secretariat))
-           // continue;
         ?>
         <tr>
             <td><?php echo htmlentities($secretariat->getId());?></td>
@@ -30,7 +24,6 @@
             <td><?php echo htmlentities($secretariat->getEmail());?></td>
             <td><?php echo htmlentities($secretariat->getNumero());?></td>
             <td><?php echo htmlentities($secretariat->getPseudo());?></td>
-            <td><?php echo htmlentities($secretariat->getPassword());?></td>
             
             <td><a href="index.php?action=edit&amp;entities=secretariat&amp;id=<?php  echo htmlentities($secretariat->getId(), ENT_QUOTES) ?>" ><button type="button" class="btn btn-dark">
           <span class="glyphicon glyphicon-pencil"></span> Editer </button></a></td>

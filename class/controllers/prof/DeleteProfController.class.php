@@ -5,8 +5,8 @@ namespace sgbdtrue\controllers\prof;
 
 
 use sgbdtrue\DAO\prof\MysqlProfDao;
-use sgbdtrue\exceptions\prof\InvalidActionException;
-use sgbdtrue\exceptions\prof\InvalidDataException;
+use sgbdtrue\exceptions\InvalidActionException;
+use sgbdtrue\exceptions\InvalidDataException;
 use sgbdtrue\utils\ErrorMessageManager;
 use sgbdtrue\utils\MysqlConnection;
 use sgbdtrue\views\prof\ConfirmProfDeletionView;
@@ -27,7 +27,7 @@ class DeleteProfController implements IController
         try
         {
             if(!isset($_GET["id"]))
-                throw new \InvalidActionException("ID manquant");
+                throw new InvalidActionException("ID manquant");
 
             $id = (int) $_GET["id"];
 

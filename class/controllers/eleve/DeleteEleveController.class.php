@@ -27,7 +27,7 @@ class DeleteEleveController implements IController
         try
         {
             if(!isset($_GET["id"]))
-                throw new \InvalidActionException("Missing id");
+                throw new InvalidActionException("Missing id");
 
             $id = (int) $_GET["id"];
 

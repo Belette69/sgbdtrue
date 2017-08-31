@@ -57,9 +57,14 @@ class CreateProfController extends AAlterProfController implements IController
             if($isTransactioStarted)
                 $pdo->rollBack();
             
-            if($ex instanceof InvalidDataException){
-                $data['invalidFields'] = $ex->getInvalidData();
+            if($ex instanceof InvalidActionException)
+            {
                 ErrorMessageManager::getInstance()->addErrorMessage($ex->getMessage());
+                header("Location: index.php?action=home&entities=eleve");
+                return;
+            }else if($ex instanceof InvalidDataException){
+                ErrorMessageManager::getInstance()->addErrorMessage($ex->getMessage());
+                $data['invalidFields'] = $ex->getInvalidData();
             }else if($ex instanceof  \PDOException && $ex->getCode() == 23000)
             {
                 $data['error'] = "L'email existe déjà.";
@@ -68,6 +73,7 @@ class CreateProfController extends AAlterProfController implements IController
             else{
                 ErrorMessageManager::getInstance()->addErrorMessage("Service indisponible");
                 header("Location: index.php");
+                return;
             }
                 
             $view = new EditProfView();

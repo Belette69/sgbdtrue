@@ -5,8 +5,8 @@ namespace sgbdtrue\controllers\secretariat;
 
 
 use sgbdtrue\DAO\secretariat\MysqlSecretariatDao;
-use sgbdtrue\exceptions\secretariat\InvalidActionException;
-use sgbdtrue\exceptions\secretariat\InvalidDataException;
+use sgbdtrue\exceptions\InvalidActionException;
+use sgbdtrue\exceptions\InvalidDataException;
 use sgbdtrue\utils\ErrorMessageManager;
 use sgbdtrue\utils\MysqlConnection;
 use sgbdtrue\views\secretariat\EditSecretariatView;
@@ -27,7 +27,7 @@ class EditSecretariatController extends AAlterSecretariatController implements I
         try
         {
             if(!isset($_GET["id"]))
-                throw new InvalidActionException("Missing id");
+                throw new InvalidActionException("ID manquant");
 
             $id = (int) $_GET["id"];
 
@@ -39,7 +39,7 @@ class EditSecretariatController extends AAlterSecretariatController implements I
             $secretariat = $secretariatDao->findById($id);
 
             if($secretariat === null)
-                throw new InvalidActionException("Unable to retrieve the secretariat with id ".$id);
+                throw new InvalidActionException("Impossible de trouver un secretaire avec un tel ID");
 
             $data['secretariat'] = $secretariat;
 
@@ -56,12 +56,12 @@ class EditSecretariatController extends AAlterSecretariatController implements I
 
 
             if(count($invalidFields) > 0)
-                throw new InvalidDataException("Invalid submitted datas", $invalidFields);
+                throw new InvalidDataException("Données soumises invalides", $invalidFields);
 
             $isTransactioStarted = $pdo->beginTransaction();
             $secretariatDao->insertOrUpdate($secretariat);
             $pdo->commit();
-
+            ErrorMessageManager::getInstance()->addSuccessMessage("Secrétaire correctement modifié");
             header("Location: index.php?action=home&entities=secretariat");
 
 
@@ -71,15 +71,14 @@ class EditSecretariatController extends AAlterSecretariatController implements I
         {
             if($ex instanceof InvalidActionException)
             {
-                ErrorMessageManager::getInstance()->addMessage($ex->getMessage());
+                ErrorMessageManager::getInstance()->addErrorMessage($ex->getMessage());
                 header("Location: index.php?action=home&entities=secretariat");
                 return;
             }
 
             if($ex instanceof  \PDOException && $ex->getCode() == 23000)
             {
-                $data['error'] = "The email already exists";
-                $data['invalidFields'] = array("email");
+                $data['error'] = "Ce secretaire existe déjà";
             }
             else
                 $data['error'] = $ex->getMessage();

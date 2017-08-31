@@ -11,6 +11,7 @@ use sgbdtrue\views\cours\CreateCoursView;
 use sgbdtrue\views\cours\EditCoursView;
 use sgbdtrue\views\cours\HomeView;
 use sgbdtrue\controllers\IController;
+use sgbdtrue\utils\ErrorMessageManager;
 
 class CreateCoursController extends AAlterCoursController implements IController
 {
@@ -47,22 +48,22 @@ class CreateCoursController extends AAlterCoursController implements IController
             $coursDao->insertOrUpdate($cours);
             $pdo->commit();
             
-            $_SESSION['success']="Cours correctement $action";
+            ErrorMessageManager::getInstance()->addSuccessMessage("Cours correctement ".$action);
             header("Location: index.php?action=home&entities=cours");
         }
         catch (\Exception $ex)
         {
             if($ex instanceof  \PDOException && $ex->getCode() == 23000)
             {
-                $_SESSION['error']="Ce cours existe déjà";
+                ErrorMessageManager::getInstance()->addErrorMessage("Ce cours existe déjà");
                 $data['invalidFields'] = array('intitule');
             }else if($ex instanceof InvalidDataException)
             {
                 $data['invalidFields'] = $ex->getInvalidData();
-                $_SESSION['error']=$ex->getMessage();
+                ErrorMessageManager::getInstance()->addErrorMessage($ex->getMessage());
             }else
             {
-                $_SESSION['error']=$ex->getMessage();
+                ErrorMessageManager::getInstance()->addErrorMessage($ex->getMessage());
             }
             if($isTransactionStarted)
                 $pdo->rollBack();

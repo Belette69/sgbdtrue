@@ -35,5 +35,7 @@ abstract class AAlterProfController implements IController
             $invalidFields[]="email";
         }
 
+        return $invalidFields;
+
     }     
 }

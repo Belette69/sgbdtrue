@@ -43,15 +43,15 @@ class EditCoursController extends AAlterCoursController implements IController
         catch (\Exception $ex)
         {
             if ($ex instanceof InvalidActionException) {
-                ErrorMessageManager::getInstance()->addMessage($ex->getMessage());
+                ErrorMessageManager::getInstance()->addErrorMessage($ex->getMessage());
                 header("Location: index.php?action=home&entities=cours");
                 return;
             }
             if ($ex instanceof \PDOException)
             {
-                $_SESSION['error'] = "Service indisponible";
+                ErrorMessageManager::getInstance()->addErrorMessage("Service indisponible");
             } else
-                $_SESSION['error'] = $ex->getMessage();
+                ErrorMessageManager::getInstance()->addErrorMessage($ex->getMessage());
             if ($isTransactioStarted)
                 $pdo->rollBack();
             header("Location: index.php");

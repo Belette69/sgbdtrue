@@ -2,6 +2,7 @@
 namespace sgbdtrue\controllers\inscription;
 
 use sgbdtrue\utils\MysqlConnection;
+use sgbdtrue\utils\ErrorMessageManager;
 use sgbdtrue\DAO\cours\MysqlCoursDao;
 use sgbdtrue\DAO\eleve\MysqlEleveDao;
 use sgbdtrue\DAO\inscription\MysqlInscriptionDao;
@@ -23,18 +24,18 @@ class CreateInscriptionController implements IController{
 
             $cours=$coursDao->findById($coursId);
             if($cours===null){
-                throw new \Exception("Cours not found");
+                throw new \Exception("Cours pas trouvé");
             }
             $eleveDao=new MysqlEleveDao($pdo);
             $eleve=$eleveDao->findById($eleveId);
             if($eleve===null){
-                throw new \Exception("Eleve not found");
+                throw new \Exception("Élève pas trouvé");
             }
             $inscriptionDao=new MysqlInscriptionDao($pdo);
             $inscriptionDao->insert($eleve,$cours);
             $pdo->commit();
-            $_SESSION['flash_success']="Eleve successfully added to this cours";
-
+            
+            ErrorMessageManager::getInstance()->addSuccessMessage("Élève correctement inscrit au cours");
 
             header('Location: index.php?action=edit&entities=eleve&id='.$eleve->getId());
 
@@ -43,18 +44,18 @@ class CreateInscriptionController implements IController{
                 $pdo->rollBack();
             }
             if($e->getCode()=="23000"){
-                $_SESSION['flash_error']="This relation already exists";
+                ErrorMessageManager::getInstance()->addErrorMessage("Cette inscription existe déjà");
             }else{
-                $_SESSION['flash_error']="Database not available";
+                ErrorMessageManager::getInstance()->addErrorMessage("Service indisponible");
             }
             echo $e->getMessage();
-            //header('Location: /');
+            header('Location: index.php');
         }catch(\Exception $e){
             if($isTransactionStarted){
                 $pdo->rollBack();
             }
-            $_SESSION['flash_error']=$e->getMessage();
-            //header('Location: /');
+            ErrorMessageManager::getInstance()->addErrorMessage($e->getMessage());
+            header('Location: index.php');
         }
         
     }
