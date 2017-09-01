@@ -148,11 +148,11 @@ class MysqlSecretariatDao implements ISecretariatDao
         return $secretariatList;
     }
 
-    public function findByEmail($email)
+    public function findByPseudo($pseudo)
     {
-        $sql = "SELECT * FROM sgbdtrue.secretariat  WHERE email = :email LIMIT 1";
+        $sql = "SELECT * FROM sgbdtrue.secretariat  WHERE pseudo = :pseudo LIMIT 1";
         $preparedStatement = $this->pdo->prepare($sql);
-        $preparedStatement->bindValue(':email', $email, \PDO::PARAM_INT);
+        $preparedStatement->bindValue(':pseudo', $pseudo, \PDO::PARAM_STR);
 
         $preparedStatement->execute();
 
@@ -161,7 +161,7 @@ class MysqlSecretariatDao implements ISecretariatDao
         if($row === false)
             return null;
 
-        return $this->makeSecretariatFromRow($row);;
+        return $this->makeSecretariatFromRow($row);
     }
 
     private function makeSecretariatFromRow(array $row)

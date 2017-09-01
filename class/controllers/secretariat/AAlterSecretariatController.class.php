@@ -43,7 +43,7 @@ abstract class AAlterSecretariatController implements IController
         {
             $invalidFields[] = 'pseudo';
         }
-        $secretariat->setPassword(isset($_POST['password']) ? trim($_POST['password']) : "");
+        $secretariat->setPassword(isset($_POST['password']) ? sha1($_POST['password']) : "");
         if($secretariat->getPassword() == "")
         {
             $invalidFields[] = 'password';

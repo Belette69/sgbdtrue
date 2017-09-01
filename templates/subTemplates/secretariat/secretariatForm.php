@@ -33,7 +33,7 @@ if(!isset($secretariat) || !($secretariat instanceof Secretariat))
         <label for="pseudo">Pseudo </label><input type="pseudo" required="required" name="pseudo" class="form-control <?php echo isset($invalidFields) && in_array('pseudo', $invalidFields) ? 'alert alert-danger' : ""?>" id="pseudo" value="<?php echo htmlentities($secretariat->getPseudo(), ENT_QUOTES);?>"/>
     </p>
     <p>
-        <label for="password">Password </label><input type="password" required="required" name="password" id="password" value="<?php echo htmlentities($secretariat->getPassword(), ENT_QUOTES);?>" type="password" class="form-control <?php echo isset($invalidFields) && in_array('password', $invalidFields) ? 'alert alert-danger' : ""?>" placeholder="Password"/>
+        <label for="password">Password </label><input type="password" required="required" name="password" id="password"  type="password" class="form-control <?php echo isset($invalidFields) && in_array('password', $invalidFields) ? 'alert alert-danger' : ""?>" placeholder="Password"/>
     </p>
 
 

@@ -11,7 +11,9 @@
 
 </head>
 <div class="container">
+
 <body>
+
     <?php
     if(isset($error))
     {
@@ -42,7 +44,14 @@
 
 
     ?>
-
+    <?php if(isset($_SESSION['name_secretaire'])): ?>
+        <button class="btn btn-light">
+        <?php echo $_SESSION['name_secretaire']; ?>
+        </button>
+        <button class="btn btn-danger">
+        <a href="index.php?action=logout">Se deconnecter</a>
+        </button>
+    <?php endif; ?>
 </body>
 </div>  
 </html>
